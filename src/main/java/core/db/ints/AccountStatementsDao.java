@@ -5,10 +5,23 @@
  */
 package core.db.ints;
 
+import core.db.entity.AccountStatements;
+import java.util.List;
+
 /**
  *
  * @author Rastislav
  */
 public interface AccountStatementsDao {
-    
+
+    void addAccountStatements(AccountStatements accountStatements);
+
+    void deleteAccountStatements(AccountStatements accountStatements);
+
+    List<AccountStatements> getAll();
+
+    AccountStatements getById(Long id);
+
+    void updateAccountStatements(AccountStatements accountStatements);
+
 }

@@ -5,10 +5,17 @@
  */
 package core.db.ints;
 
+import core.db.entity.Bank;
+import java.util.List;
+
 /**
  *
  * @author Rastislav
  */
 public interface BankDao {
     
+   List<Bank> getAll();
+
+    Bank getById(Long id);
+
 }

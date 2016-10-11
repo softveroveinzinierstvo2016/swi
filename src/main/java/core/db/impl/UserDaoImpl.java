@@ -13,128 +13,21 @@ import org.hibernate.criterion.Restrictions;
 
 public class UserDaoImpl implements UserDao {
 
-    private static Logger logger = Logger.getLogger("UserDaoImpl");
-    private static final String CSV_SEPARATOR = ";";
-
-    @Override
-    public void addUser(User user) {
-        logger.info("User adding");
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.save(user);
-        session.close();
-
-    }
-
-    @Override
-    public void deleteUser(User user) {
-        // TODO Auto-generated method stub
-
-    }
-
     @Override
     public List<User> getAll() {
-        logger.info("All users returning");
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        List<User> users = session.createCriteria(User.class).list();
-        session.close();
-        return users;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public User getById(Long id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void updateUser(User user) {
-        Session session = null;
-        Transaction tx = null;
-        logger.info("User updating");
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            tx = session.beginTransaction();
-            tx.setTimeout(5);
-
-            session.update(user);
-
-            tx.commit();
-
-        } catch (RuntimeException e) {
-            try {
-                tx.rollback();
-            } catch (RuntimeException rbe) {
-
-            }
-            throw e;
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public User getVerifedUser(String name) {
-        logger.info("Verifed user returning");
-       
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Criteria criteria = session.createCriteria(User.class);
-        criteria.add(Restrictions.eq("name", name));
-                List<User> users = criteria.list();
-        
-        if (users.size() > 1) {
-            return null;
-        }
-        if (users.size() == 0) {
-            return null;
-        } else {
-            User user = users.get(0);
-
-            session.close();
-            return user;
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<User> getAllStudents() {
-        logger.info("All students returning");
-        List<User> users = new ArrayList<>();
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Criteria criteria = session.createCriteria(User.class);
-        criteria.add(Restrictions.eq("role", "student"));
-        if (criteria.list().size() > 0) {
-            users = criteria.list();
-        }
-        session.close();
-        return users;
-    }
-
-    @Override
-    public User getByName(List<User> users, String name) {
-        logger.info("User by name returning");
-        for (User userF : users) {
-            if (userF.getName().equals(name)) {
-                return userF;
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public boolean checkUserName(String userName) {
-        logger.info("Username checking");
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Criteria criteria = session.createCriteria(User.class);
-        criteria.add(Restrictions.eq("userName", userName));
-        List<User> users = criteria.list();
-        if (users.size() == 0) {
-            session.close();
-            return true;
-        }
-        session.close();
-        return false;
-    }
-
+   
     
 }

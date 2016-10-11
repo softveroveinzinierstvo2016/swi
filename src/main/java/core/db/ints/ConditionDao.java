@@ -5,10 +5,22 @@
  */
 package core.db.ints;
 
+import core.db.entity.Condition;
+import java.util.List;
+
 /**
  *
  * @author Rastislav
  */
 public interface ConditionDao {
     
+    void addCondition(Condition condition);
+
+    void deleteCondition(Condition condition);
+
+    List<Condition> getAll();
+
+    Condition getById(Long id);
+
+    void updateCondition(Condition condition);
 }

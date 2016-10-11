@@ -5,10 +5,21 @@
  */
 package core.db.ints;
 
+import core.db.entity.BankCondition;
+import java.util.List;
 /**
  *
  * @author Rastislav
  */
 public interface BankConditionDao {
     
+    void addBankCondition(BankCondition bankCondition);
+
+    void deleteBankCondition(BankCondition bankCondition);
+
+    List<BankCondition> getAll();
+
+    BankCondition getById(Long id);
+
+    void updateBankCondition(BankCondition bankCondition);
 }
