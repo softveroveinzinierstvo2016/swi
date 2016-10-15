@@ -5,24 +5,53 @@
  */
 package core.db.impl;
 
+import core.db.HibernateUtil;
 import core.db.entity.Bank;
 import core.db.ints.BankDao;
+import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
  * @author Rastislav
  */
-public class BankDaoImpl implements BankDao{
+public class BankDaoImpl implements BankDao {
 
     @Override
     public List<Bank> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Bank> banks = new ArrayList<>();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        banks = session.createCriteria(Bank.class).list();
+        session.close();
+        return banks;
     }
 
     @Override
     public Bank getById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(Bank.class);
+        criteria.add(Restrictions.eq("id", id));
+        List<Bank> banks = criteria.list();
+        Bank bank = banks.get(0);
+        session.close();
+        return bank;
     }
-    
+
+    @Override
+    public void saveBank(Bank bank) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.save(bank);
+        session.close();
+    }
+
+    @Override
+    public void deleteBank(Bank bank) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.delete(bank);
+        session.close();
+    }
+
 }

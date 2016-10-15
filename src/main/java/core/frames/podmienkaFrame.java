@@ -6,13 +6,22 @@
 package core.frames;
 
 import core.db.entity.Bank;
+import core.db.entity.Condition;
 import core.db.entity.User;
+import core.db.impl.ConditionDaoImpl;
+import core.db.ints.ConditionDao;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Rastislav
  */
 public class podmienkaFrame extends javax.swing.JFrame {
+
+    private ConditionDao conditionDao = new ConditionDaoImpl();
+    private Condition condition;
 
     /**
      * Creates new form podmienkaFrame
@@ -41,7 +50,23 @@ public class podmienkaFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        hodnotaTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hodnotaTextFieldActionPerformed(evt);
+            }
+        });
+        hodnotaTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                hodnotaTextFieldKeyTyped(evt);
+            }
+        });
+
         znamienkoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        znamienkoComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                znamienkoComboBoxActionPerformed(evt);
+            }
+        });
 
         popisTextArea.setColumns(20);
         popisTextArea.setRows(5);
@@ -54,6 +79,11 @@ public class podmienkaFrame extends javax.swing.JFrame {
         hodnotaLabel.setText("Hodnota:");
 
         pridatButton.setText("Pridat");
+        pridatButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pridatButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -62,22 +92,20 @@ public class podmienkaFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(popisLabel)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pridatButton)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(znamienkoLabel)
-                            .addComponent(znamienkoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(hodnotaLabel)
-                            .addComponent(hodnotaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(45, 45, 45))
+                    .addComponent(znamienkoLabel)
+                    .addComponent(znamienkoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(hodnotaLabel)
+                    .addComponent(hodnotaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pridatButton))
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,15 +121,72 @@ public class podmienkaFrame extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(hodnotaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(znamienkoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pridatButton)
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    private void znamienkoComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_znamienkoComboBoxActionPerformed
+        znamienkoComboBox.addItem(">");
+        znamienkoComboBox.addItem("<");
+        znamienkoComboBox.addItem("=");
+    }//GEN-LAST:event_znamienkoComboBoxActionPerformed
+
+    private void hodnotaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hodnotaTextFieldActionPerformed
+
+
+    }//GEN-LAST:event_hodnotaTextFieldActionPerformed
+
+    private void hodnotaTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hodnotaTextFieldKeyTyped
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_hodnotaTextFieldKeyTyped
+
+    private void pridatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridatButtonActionPerformed
+        List<Boolean> vyplnenost = new ArrayList<>();
+        Boolean mozesUlozit = true;
+        condition = new Condition();
+        if (popisTextArea.getText() != null) {
+            condition.setDescription(popisTextArea.getText());
+            vyplnenost.add(true);
+        } else {
+            popisTextArea.setText("Zadajte prosim text");
+            vyplnenost.add(false);
+        }
+        if (znamienkoComboBox.getSelectedIndex() == 1) {
+            condition.setExpression(">");
+            vyplnenost.add(true);
+        }
+        if (znamienkoComboBox.getSelectedIndex() == 2) {
+            condition.setExpression("<");
+            vyplnenost.add(true);
+        }
+        if (znamienkoComboBox.getSelectedIndex() == 3) {
+            condition.setExpression("=");
+            vyplnenost.add(true);
+        }
+        if (popisTextArea.getText() != null) {
+            condition.setDescription(popisTextArea.getText());
+            vyplnenost.add(true);
+        } else {
+            popisTextArea.setText("Vyplne prosim popis");
+            vyplnenost.add(false);
+        }
+        for (Boolean boolean1 : vyplnenost) {
+            if (!boolean1) {
+                mozesUlozit = false;
+            }
+        }
+        if (mozesUlozit) {
+            conditionDao.addCondition(condition);
+        }
+    }//GEN-LAST:event_pridatButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel hodnotaLabel;

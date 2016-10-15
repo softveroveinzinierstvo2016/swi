@@ -5,24 +5,30 @@
  */
 package core.db.impl;
 
+import core.db.HibernateUtil;
 import core.db.entity.Condition;
 import core.db.ints.ConditionDao;
 import java.util.List;
+import org.hibernate.Session;
 
 /**
  *
  * @author Rastislav
  */
-public class ConditionDaoImpl implements ConditionDao{
+public class ConditionDaoImpl implements ConditionDao {
 
     @Override
     public void addCondition(Condition condition) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.save(condition);
+        session.close();
     }
 
     @Override
     public void deleteCondition(Condition condition) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.delete(condition);
+        session.close();
     }
 
     @Override
@@ -39,5 +45,5 @@ public class ConditionDaoImpl implements ConditionDao{
     public void updateCondition(Condition condition) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

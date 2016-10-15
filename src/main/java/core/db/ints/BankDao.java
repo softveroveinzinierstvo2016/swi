@@ -17,5 +17,9 @@ public interface BankDao {
    List<Bank> getAll();
 
     Bank getById(Long id);
+    
+    void saveBank(Bank bank);
+    
+    void deleteBank(Bank bank);
 
 }

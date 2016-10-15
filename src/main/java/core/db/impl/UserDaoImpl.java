@@ -25,7 +25,23 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getVerifedUser(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("menooo"+name );
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(User.class);
+        criteria.add(Restrictions.eq("name", name));
+        System.out.println("crteraia: "+criteria.list().toString());
+        List<User> users = criteria.list();
+        if (users.size() > 1) {
+            return null;
+        }
+        if (users.size() == 0) {
+            return null;
+        } else {
+            User user = users.get(0);
+
+            session.close();
+            return user;
+        }
     }
 
    
