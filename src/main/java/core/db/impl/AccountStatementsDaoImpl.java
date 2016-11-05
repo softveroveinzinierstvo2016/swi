@@ -14,27 +14,37 @@ import java.util.List;
  * @author Rastislav
  */
 public class AccountStatementsDaoImpl implements AccountStatementsDao{
-
+  /**
+    *@throws UnsupportedOperationException
+    */
     @Override
     public void addAccountStatements(AccountStatements accountStatements) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+  /**
+    *@throws UnsupportedOperationException
+    */
     @Override
     public void deleteAccountStatements(AccountStatements accountStatements) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+  /**
+    *@throws UnsupportedOperationException
+    */
     @Override
     public List<AccountStatements> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+  /**
+    *@throws UnsupportedOperationException
+    */
     @Override
     public AccountStatements getById(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+  /**
+    *@throws UnsupportedOperationException
+    */
     @Override
     public void updateAccountStatements(AccountStatements accountStatements) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

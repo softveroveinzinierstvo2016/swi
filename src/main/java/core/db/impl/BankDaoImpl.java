@@ -20,6 +20,10 @@ import org.hibernate.criterion.Restrictions;
  */
 public class BankDaoImpl implements BankDao {
 
+    /**
+     * vrati zoznam bank z databazy
+     * @return zoznam bank
+     */
     @Override
     public List<Bank> getAll() {
         List<Bank> banks = new ArrayList<>();
@@ -28,7 +32,12 @@ public class BankDaoImpl implements BankDao {
         session.close();
         return banks;
     }
-
+ /**
+    * vracia banku z databazy podla id
+    * @param id id banky
+    * @return vracia banku s danym id
+    * @see Bank
+    */
     @Override
     public Bank getById(Long id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -39,14 +48,22 @@ public class BankDaoImpl implements BankDao {
         session.close();
         return bank;
     }
-
+ /**
+     * prida banku do databazy
+     * @param bank objekt Bank, ktory bude pridany
+     * @see Bank
+     */
     @Override
     public void saveBank(Bank bank) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.save(bank);
         session.close();
     }
-
+ /**
+     * maze banku z databazy
+     * @param bank objekt Bank, ktory bude zmazany
+     * @see Bank
+     */
     @Override
     public void deleteBank(Bank bank) {
         Session session = HibernateUtil.getSessionFactory().openSession();

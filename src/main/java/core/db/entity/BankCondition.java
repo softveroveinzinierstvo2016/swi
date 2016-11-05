@@ -46,50 +46,89 @@ public class BankCondition {
     @Column(name = "change_interest_rate")
     private Double changeInterestRate;
 
+    /**
+     * vracia id podmienky nastavenej pre banku odpovedajuc identifikatoru v tabulke BankCondition
+     * @return id id Podmienky Banky
+     */
     public Long getId() {
         return id;
     }
-
+    /**
+     * nastavuje id podmienky pre banku odpovedajuc identifikatoru v tabulke BankCondition
+     * @param idBC id Podmienky Banky, AUTOINCREMENT
+     */
     public void setIdBC(Long idBC) {
         this.id = idBC;
     }
-
+    /**
+     * vracia id banky pre ktoru je tato podmienka nastavena
+     * @return id banky
+     */
     public Long getIdB() {
         return idB;
     }
-
+    /**
+     * nasatvuje id banky pre ktoru chceme tuto podmienku
+     * @param idB id banky, NotNull
+     */
     public void setIdB(Long idB) {
         this.idB = idB;
     }
-
+    /**
+     * navracia id podmienky pre danu banku
+     * @return  id Podmienky
+     */
     public Long getIdC() {
         return idC;
     }
-
+    /**
+     * nastavuje id podmienky ktoru chceme pre danu banku
+     * @param idC, NotNull
+     */
     public void setIdC(Long idC) {
         this.idC = idC;
     }
-
+    /**
+     * 
+     * @return 
+     */
     public Integer getMark() {
         return mark;
     }
-
+    /**
+     * 
+     * @param mark 
+     */
     public void setMark(Integer mark) {
         this.mark = mark;
     }
-
+    /**
+     * vracia hodnotu ktora je sucastou vyrazu pre danu podmienku
+     * @return hodnota pre vyraz podmienky
+     * @see Condition
+     */
     public Integer getValue() {
         return value;
     }
-
+    /**
+     * nastavuje hodnotu ktora je sucastou vyrazu pre danu podmienku
+     * @param value hodnota pre vyraz podmienky, NotNull
+     * @see Condition
+     */
     public void setValue(Integer value) {
         this.value = value;
     }
-
+    /**
+     * vracia o kolko sa ma zmenit urok ak je podmienka splnena
+     * @return ako sa meni urok
+     */
     public Double getChangeInterestRate() {
         return changeInterestRate;
     }
-
+    /**
+     * nasatvuje ako sa zmeni urok ak bude podmienka splnena
+     * @param changeInterestRate hodnota o ktore sa zmeni urok (signed), NotNull
+     */
     public void setChangeInterestRate(Double changeInterestRate) {
         this.changeInterestRate = changeInterestRate;
     }

@@ -33,27 +33,45 @@ public class Bank {
     @NotNull
     @Column(name = "prime_interest_rate")
     private Double primeInterestRate;
-
+    /**
+     * vracia id banky, ktore odpoveda identifikatoru v tabulke Banka, nastavuje ho databaza autoinkrementacne
+    *   @return  id odpovedajuce identifikatoru v tabulke Bank
+    */
     public Long getId() {
         return id;
     }
-
+    /**
+     * nastavuje id banky, ktore odpoveda identifikatoru v tabulke Banka, nastavuje ho databaza autoinkrementacne
+    * @param id id odpovedajuce identifikatoru v tabulke Bank, autoinkrementacne
+    */
     public void setId(Long id) {
         this.id = id;
     }
-
+    /**
+     * vracia meno banky
+    *  @return meno banky
+    */
     public String getName() {
         return name;
     }
-
+    /**
+     * nastavuje meno banky
+    * @param name meno banky, NotNull, Lenght = <1,50>
+    */
     public void setName(String name) {
         this.name = name;
     }
-
+    /**
+     * vracia zakladnu urokovu mieru banky, ku ktorej sa budu pripocitavat/odpocitavat uroky podla splnenych podmienok
+    *@return zakladny urok banky 
+    */
     public Double getPrimeInterestRate() {
         return primeInterestRate;
     }
-
+    /**
+     * nastavuje zakladnu urokovu mieru banky, ku ktorej sa budu pripocitavat/odpocitavat uroky podla splnenych podmienok
+    *@param primeInterestRate zakladny urok banky, NotNull
+    */
     public void setPrimeInterestRate(Double primeInterestRate) {
         this.primeInterestRate = primeInterestRate;
     }

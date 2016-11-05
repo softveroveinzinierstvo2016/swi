@@ -16,26 +16,53 @@ import java.util.List;
  */
 public class BankConditionDaoImpl implements BankConditionDao{
 
+    /**
+     * prida Podmienku pre Banku do databazy
+     * @param bankCondition objekt BankCondition na pridanie
+     * @see BankCondition
+     *@throws UnsupportedOperationException
+    */
     @Override
     public void addBankCondition(BankCondition bankCondition) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
-
+  /**
+     * zmaze Podmienku pre Banku z databazy
+     * @param bankCondition objekt BankCondition na zmazanie
+     * @see BankCondition
+    *@throws UnsupportedOperationException
+    */
     @Override
     public void deleteBankCondition(BankCondition bankCondition) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+  /**
+   * vrati vsetky Podmienky pre Banku z databazy
+     * @return zoznam Podmienok pre Banku
+     * @see BankCondition
+    *@throws UnsupportedOperationException
+    */
     @Override
     public List<BankCondition> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+  /**
+   * vrati Podmienku pre Banku podla id z databazy
+     * @param id identifikator Podmienky pre Banku
+     * @return objekt BankCondition
+     * @see BankCondition
+    *@throws UnsupportedOperationException
+    */
     @Override
     public BankCondition getById(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+  /**
+   *  upravi Podmienku pre Banku v databaze
+     * @param bankCondition ako sa ma Podmienka pre Banku upravit
+     * @see BankCondition
+    *@throws UnsupportedOperationException
+    */
     @Override
     public void updateBankCondition(BankCondition bankCondition) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
