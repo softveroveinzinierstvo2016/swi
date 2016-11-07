@@ -89,15 +89,25 @@ public class BankCondition {
         this.idC = idC;
     }
     /**
-     * 
-     * @return 
+     * vracia integer ktory reprezentuje porovnavacie znamienko v podmienke<br>
+     * 0 = <br>
+     * 1 >= <br>
+     * -1 <= <br>
+     * -2 < <br>
+     * 2 > <br>
+     * @return cislo reprezentujuce porovnavacie znamienko 
      */
     public Integer getMark() {
         return mark;
     }
     /**
-     * 
-     * @param mark 
+     * nastavuje integer ktory reprezentuje porovnavacie znamienko v podmienke<br>
+     * 0 = <br>
+     * 1 >= <br>
+     * -1 <= <br>
+     * -2 < <br>
+     * 2 > <br>
+     * @param mark cislo reprezentujuce porovnavacie znamienko, Set{-2,-1,0,1,2}
      */
     public void setMark(Integer mark) {
         this.mark = mark;

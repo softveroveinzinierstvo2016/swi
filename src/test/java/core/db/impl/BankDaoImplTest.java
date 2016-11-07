@@ -50,8 +50,6 @@ public class BankDaoImplTest {
         List<Bank> expResult = null;
         List<Bank> result = instance.getAll();
         System.out.println("Vysledok:");
-        for(Bank bank : result)
-        System.out.println(bank.getName()+" id = "+bank.getId());
         int expecteds = 17;
         int actuals = result.size();
         assertEquals(expecteds, actuals);
