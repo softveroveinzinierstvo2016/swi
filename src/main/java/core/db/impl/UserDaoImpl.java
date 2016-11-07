@@ -12,17 +12,33 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 public class UserDaoImpl implements UserDao {
-
+    /**
+    * vrati zoznam vsetkych uzivatelov z databazy
+    * @return zoznam uzlivatelov
+    *@throws UnsupportedOperationException
+    */
     @Override
     public List<User> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    /**
+     * vrati uzivatela podla id z databazy
+     * @param id id uzivatela
+     * @return vrati uzivatela podla zadaneho id
+     * @see User
+     *@throws UnsupportedOperationException
+    */
     @Override
     public User getById(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+      /**
+     * overi ci uzivatel so zadanym menom splna podmienky verifikacie <br>
+     * ak splna podmienky vrati ho ako objekt, inak vracia null
+     * @param name meno uzivatela ktory sa chce prihlasit
+     * @return vracia objekt User s menom name ak splna podmienky verifikacie, inak vracia null
+     * @see User
+     */
     @Override
     public User getVerifedUser(String name) {
         System.out.println("menooo"+name );

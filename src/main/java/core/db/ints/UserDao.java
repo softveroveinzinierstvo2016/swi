@@ -12,11 +12,24 @@ import java.util.List;
  * @since 2016-04-25
  */
 public interface UserDao {
-
+    /**
+     * vracia zoznam vsetkych uzivatelov
+     * @return zoznam uzlivatelov
+     */
     List<User> getAll();
-
+    /**
+     * vrati uzivatela podla id
+     * @param id id uzivatela
+     * @return vrati uzivatela podla zadaneho id
+     * @see User
+     */
     User getById(Long id);
-
+    /**
+     * overuje ci uzivatel so zadanym menom splna podmienky verifikacie ak ano, vrati ho ako objekt, inak vracia null
+     * @param name meno uzivatela ktory sa chce prihlasit
+     * @return vracia objekt User s menom name ak splna podmienky verifikacie, inak vracia null
+     * @see User
+     */
     User getVerifedUser(String name);
 
 }

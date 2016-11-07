@@ -78,24 +78,31 @@ public class loginFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void PrihlasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrihlasButtonActionPerformed
+                                          
         System.out.println("FFF"+ menoTextField.getText());        
         bankFrame bFrame = null;
         userFrame uFrame = null;
         adminMainFrame mFrame = null;
 
         user = userDao.getVerifedUser(menoTextField.getText());
-        if(user.getRole().equals("bank")){
+	if(user == null)
+	{
+		return;
+	}
+        if("bank".equals(user.getRole())){
             bFrame = new bankFrame(user);
             bFrame.setVisible(true);
         }
-        if(user.getRole().equals("user")){
+        if("user".equals(user.getRole())){
             uFrame = new userFrame(user);
             uFrame.setVisible(true);
         }
-        if(user.getRole().equals("administrator")){
+        if("administrator".equals(user.getRole())){
             mFrame = new adminMainFrame(user);
             mFrame.setVisible(true);
         }
+           
+                      
     }//GEN-LAST:event_PrihlasButtonActionPerformed
 
     private void menoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menoTextFieldActionPerformed
