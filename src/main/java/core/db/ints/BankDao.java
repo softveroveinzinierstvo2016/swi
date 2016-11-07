@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface BankDao {
     
-   List<Bank> getAll();
+    List<Bank> getAll();
 
     Bank getById(Long id);
     

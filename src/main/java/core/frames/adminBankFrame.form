@@ -37,12 +37,16 @@
                       </Group>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="menoTextField1" min="-2" pref="138" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="menoTextField1" min="-2" pref="138" max="-2" attributes="0"/>
+                              <EmptySpace pref="44" max="32767" attributes="0"/>
+                              <Component id="zatvoritButton1" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="ratingTextField1" min="-2" pref="93" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="15" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -54,6 +58,7 @@
                   <Component id="pridajButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="menoTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="menoLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="zatvoritButton1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -144,6 +149,14 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ratingTextField1ActionPerformed"/>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="ratingTextField1KeyTyped"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="zatvoritButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Zatvorit"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="zatvoritButton1ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

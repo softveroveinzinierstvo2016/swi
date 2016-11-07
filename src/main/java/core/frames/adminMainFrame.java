@@ -36,6 +36,7 @@ private User userF;
 
         spravaKlientovButton1 = new javax.swing.JButton();
         spravaBankButton2 = new javax.swing.JButton();
+        odhlasitButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,6 +54,13 @@ private User userF;
             }
         });
 
+        odhlasitButton1.setText("Odhlasit");
+        odhlasitButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                odhlasitButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -63,11 +71,17 @@ private User userF;
                 .addGap(52, 52, 52)
                 .addComponent(spravaBankButton2)
                 .addContainerGap(67, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(odhlasitButton1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(139, 139, 139)
+                .addContainerGap()
+                .addComponent(odhlasitButton1)
+                .addGap(105, 105, 105)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(spravaKlientovButton1)
                     .addComponent(spravaBankButton2))
@@ -91,11 +105,16 @@ private User userF;
     }
     }//GEN-LAST:event_spravaBankButton2ActionPerformed
 
+    private void odhlasitButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_odhlasitButton1ActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_odhlasitButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton odhlasitButton1;
     private javax.swing.JButton spravaBankButton2;
     private javax.swing.JButton spravaKlientovButton1;
     // End of variables declaration//GEN-END:variables

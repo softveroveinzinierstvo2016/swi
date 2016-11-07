@@ -32,19 +32,24 @@ public class adminBankFrame extends javax.swing.JFrame {
     /**
      * Creates new form userAdminFrame
      */
- 
+ public void inicializujTabulku(){
+ DefaultTableModel tableModel = (DefaultTableModel)bankTable1.getModel();
+        List<Bank> banky = bankDao.getAll();
+        bankTable1.removeAll();
+        tableModel.setNumRows(banky.size());
+        for (int i = 0; i < banky.size(); i++) {
+            Long id = banky.get(i).getId();
+            String meno = banky.get(i).getName();
+            Double rating = banky.get(i).getPrimeInterestRate();
+            Object[] data = {id, meno, rating};
+            tableModel.setValueAt(id, i, 0);
+            tableModel.setValueAt(meno, i, 1);
+            tableModel.setValueAt(rating, i, 2);
+            }}
 
     public adminBankFrame(User user) throws SQLException {
-        initComponents();
-        DefaultTableModel tableModel = (DefaultTableModel)bankTable1.getModel();
-        for (int i = 0; i < bankDao.getAll().size(); i++) {
-            Long id = bankDao.getAll().get(i).getId();
-            String meno = bankDao.getAll().get(i).getName();
-            Double rating = bankDao.getAll().get(i).getPrimeInterestRate();
-            Object[] data = {id, meno, rating};
-            tableModel.addRow(data);
-            }
-      
+        initComponents();    
+      inicializujTabulku();
        
         
     }
@@ -66,6 +71,7 @@ public class adminBankFrame extends javax.swing.JFrame {
         menoLabel1 = new javax.swing.JLabel();
         RatingLabel1 = new javax.swing.JLabel();
         ratingTextField1 = new javax.swing.JTextField();
+        zatvoritButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,6 +125,13 @@ public class adminBankFrame extends javax.swing.JFrame {
             }
         });
 
+        zatvoritButton1.setText("Zatvorit");
+        zatvoritButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                zatvoritButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -136,9 +149,12 @@ public class adminBankFrame extends javax.swing.JFrame {
                             .addComponent(RatingLabel1))
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(menoTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(menoTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                                .addComponent(zatvoritButton1))
                             .addComponent(ratingTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,7 +163,8 @@ public class adminBankFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pridajButton1)
                     .addComponent(menoTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(menoLabel1))
+                    .addComponent(menoLabel1)
+                    .addComponent(zatvoritButton1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(RatingLabel1)
@@ -161,7 +178,7 @@ public class adminBankFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void pridajButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridajButton1ActionPerformed
         List<Boolean> vyplnenost = new ArrayList<>();
         Boolean mozesUlozit = true;
@@ -191,7 +208,8 @@ public class adminBankFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_pridajButton1ActionPerformed
 
     private void vymazButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vymazButton1ActionPerformed
-        bankDao.deleteBank(bankDao.getById((long) bankTable1.getSelectedRow()));
+        bankDao.deleteBank(bankDao.getById((long)  bankTable1.getValueAt(bankTable1.getSelectedRow(), 0)));
+        inicializujTabulku();
     }//GEN-LAST:event_vymazButton1ActionPerformed
 
     private void ratingTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ratingTextField1ActionPerformed
@@ -206,6 +224,10 @@ public class adminBankFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_ratingTextField1KeyTyped
 
+    private void zatvoritButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zatvoritButton1ActionPerformed
+       this.setVisible(false);
+    }//GEN-LAST:event_zatvoritButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel RatingLabel1;
@@ -216,6 +238,7 @@ public class adminBankFrame extends javax.swing.JFrame {
     private javax.swing.JButton pridajButton1;
     private javax.swing.JTextField ratingTextField1;
     private javax.swing.JButton vymazButton1;
+    private javax.swing.JButton zatvoritButton1;
     // End of variables declaration//GEN-END:variables
     private static Bank novaBanka;
 

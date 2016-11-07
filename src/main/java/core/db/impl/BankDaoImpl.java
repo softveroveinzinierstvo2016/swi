@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -49,9 +50,30 @@ public class BankDaoImpl implements BankDao {
 
     @Override
     public void deleteBank(Bank bank) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.delete(bank);
-        session.close();
-    }
+        Transaction tx = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            tx = session.beginTransaction();
+            tx.setTimeout(5);
 
+            session.delete(bank);
+
+            tx.commit();
+
+        } catch (RuntimeException e) {
+            try {
+                tx.rollback();
+            } catch (RuntimeException rbe) {
+
+            }
+            throw e;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+
+        }
+
+    }
 }

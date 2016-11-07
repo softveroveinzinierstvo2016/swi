@@ -47,6 +47,7 @@ public class podmienkaFrame extends javax.swing.JFrame {
         znamienkoLabel = new javax.swing.JLabel();
         hodnotaLabel = new javax.swing.JLabel();
         pridatButton = new javax.swing.JButton();
+        zatvoritButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,6 +86,13 @@ public class podmienkaFrame extends javax.swing.JFrame {
             }
         });
 
+        zatvoritButton1.setText("Zatvorit");
+        zatvoritButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                zatvoritButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -106,11 +114,17 @@ public class podmienkaFrame extends javax.swing.JFrame {
                     .addComponent(hodnotaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pridatButton))
                 .addGap(29, 29, 29))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(zatvoritButton1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
+                .addContainerGap()
+                .addComponent(zatvoritButton1)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(popisLabel)
                     .addComponent(znamienkoLabel)
@@ -187,6 +201,10 @@ public class podmienkaFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_pridatButtonActionPerformed
 
+    private void zatvoritButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zatvoritButton1ActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_zatvoritButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel hodnotaLabel;
@@ -195,6 +213,7 @@ public class podmienkaFrame extends javax.swing.JFrame {
     private javax.swing.JLabel popisLabel;
     private javax.swing.JTextArea popisTextArea;
     private javax.swing.JButton pridatButton;
+    private javax.swing.JButton zatvoritButton1;
     private javax.swing.JComboBox<String> znamienkoComboBox;
     private javax.swing.JLabel znamienkoLabel;
     // End of variables declaration//GEN-END:variables

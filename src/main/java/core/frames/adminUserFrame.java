@@ -60,6 +60,11 @@ public class adminUserFrame extends javax.swing.JFrame {
         pridajButton1.setText("Pridaj");
 
         vymazButton2.setText("Vymaz");
+        vymazButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vymazButton2ActionPerformed(evt);
+            }
+        });
 
         menoLabel1.setText("Meno:");
 
@@ -129,6 +134,10 @@ public class adminUserFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void vymazButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vymazButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vymazButton2ActionPerformed
 
     /**
      * @param args the command line arguments
