@@ -73,8 +73,6 @@ public class adminBankFrame extends javax.swing.JFrame {
         ratingTextField1 = new javax.swing.JTextField();
         zatvoritButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         bankTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},

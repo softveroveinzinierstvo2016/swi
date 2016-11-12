@@ -37,12 +37,10 @@ public class adminUserFrame extends javax.swing.JFrame {
         vymazButton2 = new javax.swing.JButton();
         menoTextField = new javax.swing.JTextField();
         menoLabel1 = new javax.swing.JLabel();
-        bankaComboBox1 = new javax.swing.JComboBox<>();
+        bankaComboBox1 = new javax.swing.JComboBox<String>();
         jLabel1 = new javax.swing.JLabel();
         rolaLabel2 = new javax.swing.JLabel();
-        rolaComboBox1 = new javax.swing.JComboBox<>();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        rolaComboBox1 = new javax.swing.JComboBox<String>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -68,13 +66,13 @@ public class adminUserFrame extends javax.swing.JFrame {
 
         menoLabel1.setText("Meno:");
 
-        bankaComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        bankaComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel1.setText("Banka:");
 
         rolaLabel2.setText("Rola:");
 
-        rolaComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        rolaComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

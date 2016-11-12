@@ -40,7 +40,7 @@ public class podmienkaFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         hodnotaTextField = new javax.swing.JTextField();
-        znamienkoComboBox = new javax.swing.JComboBox<>();
+        znamienkoComboBox = new javax.swing.JComboBox<String>();
         jScrollPane1 = new javax.swing.JScrollPane();
         popisTextArea = new javax.swing.JTextArea();
         popisLabel = new javax.swing.JLabel();
@@ -49,7 +49,7 @@ public class podmienkaFrame extends javax.swing.JFrame {
         pridatButton = new javax.swing.JButton();
         zatvoritButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         hodnotaTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,7 +62,7 @@ public class podmienkaFrame extends javax.swing.JFrame {
             }
         });
 
-        znamienkoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        znamienkoComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         znamienkoComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 znamienkoComboBoxActionPerformed(evt);

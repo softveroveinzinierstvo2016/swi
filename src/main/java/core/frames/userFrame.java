@@ -27,7 +27,7 @@ public class userFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pocetRokovComboBox = new javax.swing.JComboBox<>();
+        pocetRokovComboBox = new javax.swing.JComboBox<String>();
         pocetRokovLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ponukyTable = new javax.swing.JTable();
@@ -35,9 +35,7 @@ public class userFrame extends javax.swing.JFrame {
         sumaTextField = new javax.swing.JTextField();
         vyhladajButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        pocetRokovComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        pocetRokovComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         pocetRokovLabel.setText("Pocet rokov:");
 

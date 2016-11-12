@@ -38,7 +38,7 @@ private User userF;
         spravaBankButton2 = new javax.swing.JButton();
         odhlasitButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         spravaKlientovButton1.setText("Sprava Klientov");
         spravaKlientovButton1.addActionListener(new java.awt.event.ActionListener() {

@@ -7,113 +7,106 @@ package core.db.impl;
 
 import core.db.entity.Bank;
 import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.testng.Assert.*;
 
 /**
  *
  * @author Slavomír
  */
-public class BankDaoImplTest {
-    
-    public BankDaoImplTest() {
+public class BankDaoImplNGTest {
+    private Bank bank = new Bank();
+    public BankDaoImplNGTest() {
+        bank.setName("testSaveBank");
+        bank.setPrimeInterestRate(12.0);
+        bank.setId(4L);
     }
-    
-    @BeforeClass
-    public static void setUpClass() {
+
+    @org.testng.annotations.BeforeClass
+    public static void setUpClass() throws Exception {
     }
-    
-    @AfterClass
-    public static void tearDownClass() {
+
+    @org.testng.annotations.AfterClass
+    public static void tearDownClass() throws Exception {
     }
-    
-    @Before
-    public void setUp() {
+
+    @org.testng.annotations.BeforeMethod
+    public void setUpMethod() throws Exception {
     }
-    
-    @After
-    public void tearDown() {
+
+    @org.testng.annotations.AfterMethod
+    public void tearDownMethod() throws Exception {
     }
 
     /**
      * Test of getAll method, of class BankDaoImpl.
      */
-    @Test
+    @org.testng.annotations.Test
     public void testGetAll() {
-        /*OK*/
-        System.out.println("getAll");
+       System.out.println("getAll");
         BankDaoImpl instance = new BankDaoImpl();
-        List<Bank> expResult = null;
         List<Bank> result = instance.getAll();
-        System.out.println("Vysledok:");
-        int expecteds = 17;
-        int actuals = result.size();
-        assertEquals(expecteds, actuals);
+        int expected = 3;
+        int actual = result.size();
+        assertEquals(expected, actual);
     }
 
     /**
      * Test of getById method, of class BankDaoImpl.
      */
-    @Test
+    @org.testng.annotations.Test
     public void testGetById() {
-        System.out.println("getById");
-        Long id = 16L;
+       System.out.println("getById");
+        Long id = 1L;
         BankDaoImpl instance = new BankDaoImpl();
         Bank expResult = new Bank();
+        Bank result = null;
+       
         expResult.setId(id);
-        expResult.setName("testSaveBank");
+        expResult.setName("OTP");
         expResult.setPrimeInterestRate(12.0);
-        Bank result = instance.getById(id);
+        
+        result = instance.getById(id);
         
         assertEquals(expResult.getId(),result.getId() );
         assertEquals(expResult.getName(), result.getName());
         assertEquals(expResult.getPrimeInterestRate(), result.getPrimeInterestRate());
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        
+        id = 100L;
+        result = instance.getById(id);
+        assertEquals(null, result);
     }
 
     /**
      * Test of saveBank method, of class BankDaoImpl.
      */
-    @Test
+    @org.testng.annotations.Test(dependsOnMethods = "testGetAll")
     public void testSaveBank() {
-        /*OK*/
         System.out.println("saveBank");
-        Bank bank = new Bank();
-        bank.setName("testSaveBank");
-        bank.setPrimeInterestRate(12.0);
+       
         BankDaoImpl instance = new BankDaoImpl();
         
         int expCount = instance.getAll().size()+1;
         instance.saveBank(bank);
         int actualCount = instance.getAll().size();
         assertEquals(expCount, actualCount);
-        // TODO review the generated test code and remove the default call to fail.
-          // fail("The test case is a prototype.");
     }
 
     /**
      * Test of deleteBank method, of class BankDaoImpl.
      */
-    @Test
+    @org.testng.annotations.Test(dependsOnMethods = "testSaveBank")
     public void testDeleteBank() {
         System.out.println("deleteBank");
 
         BankDaoImpl instance = new BankDaoImpl();
         int expCount = instance.getAll().size()-1;
-        Bank bank = new Bank();
-        bank.setId(16L);
-        bank.setName("testSaveBank");
-        bank.setPrimeInterestRate(12.0);
+        
         instance.deleteBank(bank);
         
         int actualCount = instance.getAll().size();
-        assertEquals(expCount, actualCount);
-                
+        assertEquals(expCount, actualCount);  
     }
     
 }
