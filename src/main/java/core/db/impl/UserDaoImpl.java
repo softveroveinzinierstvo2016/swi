@@ -59,6 +59,52 @@ public class UserDaoImpl implements UserDao {
             return user;
         }
     }
+    
+    /**
+     * prida usera do databazy
+     * @param user objekt User, ktory bude pridany
+     * @see User
+     */
+    @Override
+    public void saveUser(User user) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.save(user);
+        session.close();
+    }
+    
+    /**
+     * maze usera z databazy
+     * @param user objekt User, ktory bude zmazany
+     * @see User
+     */
+    @Override
+    public void deleteBank(User user) {
+        Transaction tx = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            tx = session.beginTransaction();
+            tx.setTimeout(5);
+
+            session.delete(user);
+
+            tx.commit();
+
+        } catch (RuntimeException e) {
+            try {
+                tx.rollback();
+            } catch (RuntimeException rbe) {
+
+            }
+            throw e;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+
+        }
+
+    }
 
    
     

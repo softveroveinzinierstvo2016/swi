@@ -6,18 +6,53 @@
 package core.frames;
 
 import core.db.entity.User;
+import core.db.entity.Bank;
+import core.db.impl.UserDaoImpl;
+import core.db.ints.UserDao;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
- * @author Rastislav
+ * @author Rastislav, Martin
  */
 public class adminUserFrame extends javax.swing.JFrame {
 
-    /**
+    
+    private static UserDao userDao = new UserDaoImpl();    /**
      * Creates new form adminBankFrame
      */
+    
+     public void inicializujTabulku(){
+        DefaultTableModel tableModel = (DefaultTableModel)jTable1.getModel();
+        List<User> users = userDao.getAll();
+        jTable1.removeAll();
+        tableModel.setNumRows(users.size());
+        for (int i = 0; i < users.size(); i++) {
+            Long id = users.get(i).getId();
+            Long idB = users.get(i).getIdB();
+            String role = users.get(i).getRole();
+            String meno = users.get(i).getName();
+            Object[] data = {id, idB, role, meno};
+            tableModel.setValueAt(id, i, 0);
+            tableModel.setValueAt(idB, i, 1);
+            tableModel.setValueAt(role, i, 2);
+            tableModel.setValueAt(meno, i, 3);
+            }
+     }
+
     public adminUserFrame(User user) {
         initComponents();
+        inicializujTabulku();
     }
 
    
@@ -37,10 +72,10 @@ public class adminUserFrame extends javax.swing.JFrame {
         vymazButton2 = new javax.swing.JButton();
         menoTextField = new javax.swing.JTextField();
         menoLabel1 = new javax.swing.JLabel();
-        bankaComboBox1 = new javax.swing.JComboBox<String>();
+        bankaComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         rolaLabel2 = new javax.swing.JLabel();
-        rolaComboBox1 = new javax.swing.JComboBox<String>();
+        rolaComboBox1 = new javax.swing.JComboBox<>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -50,12 +85,25 @@ public class adminUserFrame extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "IdB", "Role", "Meno"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         pridajButton1.setText("Pridaj");
+        pridajButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pridajButton1ActionPerformed(evt);
+            }
+        });
 
         vymazButton2.setText("Vymaz");
         vymazButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -66,13 +114,13 @@ public class adminUserFrame extends javax.swing.JFrame {
 
         menoLabel1.setText("Meno:");
 
-        bankaComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        bankaComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel1.setText("Banka:");
 
         rolaLabel2.setText("Rola:");
 
-        rolaComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        rolaComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,8 +182,42 @@ public class adminUserFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void vymazButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vymazButton2ActionPerformed
-        // TODO add your handling code here:
+        userDao.deleteUser(userDao.getById((long)  jTable1.getValueAt(jTable1.getSelectedRow(), 0)));
+        inicializujTabulku();
     }//GEN-LAST:event_vymazButton2ActionPerformed
+
+    private void pridajButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridajButton1ActionPerformed
+         List<Boolean> vyplnenost = new ArrayList<>();
+        Boolean mozesUlozit = true;
+        if (menoTextField.getText().length() < 50) {
+            novyUser = new User();
+            novyUser.setName(menoTextField.getText());
+            vyplnenost.add(true);
+        } else {
+            menoTextField.setText("Nespravne vyplnene data");
+            vyplnenost.add(false);
+        }
+        
+        if (rolaComboBox1.getSelectedIndex() != -1) {
+            novyUser.setRole(rolaComboBox1.getItemAt(rolaComboBox1.getSelectedIndex()));
+        } else {
+            vyplnenost.add(false);
+        }
+        
+        if (bankaComboBox1.getSelectedIndex() != -1) {
+            novyUser.setIdB((long) bankaComboBox1.getSelectedIndex());
+        } else {
+            vyplnenost.add(false);
+        }
+        for (Boolean boolean1 : vyplnenost) {
+            if (!boolean1) {
+                mozesUlozit = false;
+            }
+        }
+        if (mozesUlozit) {
+            userDao.saveUser(novyUser);
+        }
+    }//GEN-LAST:event_pridajButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,6 +236,6 @@ public class adminUserFrame extends javax.swing.JFrame {
     private javax.swing.JLabel rolaLabel2;
     private javax.swing.JButton vymazButton2;
     // End of variables declaration//GEN-END:variables
-
+    private static User novyUser;
 
 }

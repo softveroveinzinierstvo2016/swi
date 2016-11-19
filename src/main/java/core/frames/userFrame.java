@@ -5,17 +5,55 @@
  */
 package core.frames;
 import core.db.entity.User;
+import core.db.entity.Bank;
+import core.db.entity.Condition;
+import core.db.impl.BankDaoImpl;
+import core.db.impl.ConditionDaoImpl;
+import core.db.impl.UserDaoImpl;
+import core.db.ints.BankDao;
+import core.db.ints.ConditionDao;
+import core.db.ints.UserDao;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 /**
  *
- * @author Rastislav
+ * @author Rastislav, Martin
  */
 public class userFrame extends javax.swing.JFrame {
 
+    private static BankDao bankDao = new BankDaoImpl();
+    
+    public void inicializujTabulku(){
+    DefaultTableModel tableModel = (DefaultTableModel)ponukyTable.getModel();
+        List<Bank> banky = bankDao.getAll();
+        ponukyTable.removeAll();
+        tableModel.setNumRows(banky.size());
+        for (int i = 0; i < banky.size(); i++) {
+            Long id = banky.get(i).getId();
+            String meno = banky.get(i).getName();
+            Double rating = banky.get(i).getPrimeInterestRate();
+            Object[] data = {id, meno, rating};
+            tableModel.setValueAt(id, i, 0);
+            tableModel.setValueAt(meno, i, 1);
+            tableModel.setValueAt(rating, i, 2);
+            }
+    }
+    
     /**
      * Creates new form userFrame
      */
     public userFrame(User user) {
         initComponents();
+        //inicializujTabulku();
     }
 
     /**
@@ -27,7 +65,7 @@ public class userFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pocetRokovComboBox = new javax.swing.JComboBox<String>();
+        pocetRokovComboBox = new javax.swing.JComboBox<>();
         pocetRokovLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ponukyTable = new javax.swing.JTable();
@@ -35,26 +73,39 @@ public class userFrame extends javax.swing.JFrame {
         sumaTextField = new javax.swing.JTextField();
         vyhladajButton = new javax.swing.JButton();
 
-        pocetRokovComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        pocetRokovComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         pocetRokovLabel.setText("Pocet rokov:");
 
         ponukyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Meno", "Rating"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(ponukyTable);
 
         sumaLabel.setText("Suma:");
 
         vyhladajButton.setText("Vyhladaj");
+        vyhladajButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vyhladajButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,6 +144,10 @@ public class userFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void vyhladajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vyhladajButtonActionPerformed
+        inicializujTabulku();
+    }//GEN-LAST:event_vyhladajButtonActionPerformed
 
     
 

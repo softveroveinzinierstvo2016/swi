@@ -6,19 +6,55 @@
 package core.frames;
 
 import core.db.entity.User;
+import core.db.entity.Bank;
+import core.db.entity.Condition;
+import core.db.impl.BankDaoImpl;
+import core.db.impl.ConditionDaoImpl;
+import core.db.ints.BankDao;
+import core.db.ints.ConditionDao;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
- * @author Rastislav
+ * @author Rastislav, Martin
  */
 public class bankFrame extends javax.swing.JFrame {
 private User userF;
+
+    private static ConditionDao podmienkaDao = new ConditionDaoImpl();
+    
+    public void inicializujTabulku(){
+    DefaultTableModel tableModel = (DefaultTableModel)podmienkyTable.getModel();
+        List<Condition> podmienky = podmienkaDao.getAll();
+        podmienkyTable.removeAll();
+        tableModel.setNumRows(podmienky.size());
+        for (int i = 0; i < podmienky.size(); i++) {
+            Long id = podmienky.get(i).getId();
+            String description = podmienky.get(i).getDescription();
+            String expression = podmienky.get(i).getExpression();
+            Object[] data = {id, description, expression};
+            tableModel.setValueAt(id, i, 0);
+            tableModel.setValueAt(description, i, 1);
+            tableModel.setValueAt(expression, i, 2);
+            }
+    }
     /**
      * Creates new form bankFrame
      */
     public bankFrame(User user) {
         userF = user;
         initComponents();
+        inicializujTabulku();
     }
 
     /**
@@ -43,15 +79,23 @@ private User userF;
 
         podmienkyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Description", "Expression"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(podmienkyTable);
 
         pridatPodmienkuButton.setText("Pridat podmienku");
@@ -86,7 +130,11 @@ private User userF;
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pridatPodmienkuButton))
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(zmazatPodmienkuButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -94,24 +142,25 @@ private User userF;
                             .addComponent(vsetky)
                             .addComponent(neaktivneRadioButton)
                             .addComponent(aktivneRadioButton))
-                        .addGap(9, 9, 9))
-                    .addComponent(pridatPodmienkuButton))
-                .addContainerGap())
+                        .addGap(19, 19, 19))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pridatPodmienkuButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(zmazatPodmienkuButton)
-                .addGap(15, 15, 15)
-                .addComponent(aktivneRadioButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(aktivneRadioButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(zmazatPodmienkuButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(neaktivneRadioButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(vsetky)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -123,11 +172,12 @@ private User userF;
        podmienkaFrame pFrame = null;
             pFrame = new podmienkaFrame(userF);
             pFrame.setVisible(true);
-        
+        inicializujTabulku();
     }//GEN-LAST:event_pridatPodmienkuButtonActionPerformed
 
     private void zmazatPodmienkuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazatPodmienkuButtonActionPerformed
-        // TODO add your handling code here:
+        podmienkaDao.deleteCondition(podmienkaDao.getById((long) podmienkyTable.getValueAt(podmienkyTable.getSelectedRow(), 0)));
+        inicializujTabulku();
     }//GEN-LAST:event_zmazatPodmienkuButtonActionPerformed
 
     private void aktivneRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aktivneRadioButtonActionPerformed
