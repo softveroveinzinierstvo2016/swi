@@ -202,6 +202,7 @@ public class adminBankFrame extends javax.swing.JFrame {
         }
         if (mozesUlozit) {
             bankDao.saveBank(novaBanka);
+            inicializujTabulku();
         }
     }//GEN-LAST:event_pridajButton1ActionPerformed
 
