@@ -78,7 +78,7 @@ public class UserDaoImpl implements UserDao {
      * @see User
      */
     @Override
-    public void deleteBank(User user) {
+    public void deleteUser(User user) {
         Transaction tx = null;
         Session session = null;
         try {
