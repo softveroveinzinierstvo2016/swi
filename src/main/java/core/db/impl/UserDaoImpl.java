@@ -19,7 +19,11 @@ public class UserDaoImpl implements UserDao {
     */
     @Override
     public List<User> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<User> users = new ArrayList<>();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        users = session.createCriteria(User.class).list();
+        session.close();
+        return users;
     }
     /**
      * vrati uzivatela podla id z databazy
@@ -30,7 +34,13 @@ public class UserDaoImpl implements UserDao {
     */
     @Override
     public User getById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(User.class);
+        criteria.add(Restrictions.eq("id", id));
+        List<User> users = criteria.list();
+        User user = users.get(0);
+        session.close();
+        return user;
     }
       /**
      * overi ci uzivatel so zadanym menom splna podmienky verifikacie <br>
