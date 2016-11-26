@@ -45,9 +45,13 @@ public class BankDaoImpl implements BankDao {
         Criteria criteria = session.createCriteria(Bank.class);
         criteria.add(Restrictions.eq("id", id));
         List<Bank> banks = criteria.list();
+        if(banks.get(0)!=null){
         Bank bank = banks.get(0);
         session.close();
-        return bank;
+        return bank;}
+        else {
+            session.close();
+            return null;}
     }
  /**
      * prida banku do databazy

@@ -180,19 +180,19 @@ public class adminBankFrame extends javax.swing.JFrame {
     private void pridajButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridajButton1ActionPerformed
         List<Boolean> vyplnenost = new ArrayList<>();
         Boolean mozesUlozit = true;
-        if (menoTextField1.getText().length() < 50) {
+        if (menoTextField1.getText().length() < 50 && menoTextField1.getText()!=null &&  menoTextField1.getText().length()>0) {
             novaBanka = new Bank();
             novaBanka.setName(menoTextField1.getText());
             vyplnenost.add(true);
         } else {
-            menoTextField1.setText("Nespravne vyplnene data");
+      //      menoTextField1.setText("Nespravne vyplnene data");
             vyplnenost.add(false);
         }
-        if (ratingTextField1.getText() != null) {
+        if (ratingTextField1.getText() != null || ratingTextField1.getText().equals("") ) {
             novaBanka.setPrimeInterestRate(Double.parseDouble(ratingTextField1.getText()));
             vyplnenost.add(true);
         } else {
-            ratingTextField1.setText("Nevyplnený rating");
+      //      ratingTextField1.setText("Nevyplnený rating");
             vyplnenost.add(false);
         }
         for (Boolean boolean1 : vyplnenost) {
@@ -202,12 +202,14 @@ public class adminBankFrame extends javax.swing.JFrame {
         }
         if (mozesUlozit) {
             bankDao.saveBank(novaBanka);
+            inicializujTabulku();
         }
     }//GEN-LAST:event_pridajButton1ActionPerformed
 
     private void vymazButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vymazButton1ActionPerformed
+        if(bankTable1.getSelectedRow() >=0){
         bankDao.deleteBank(bankDao.getById((long)  bankTable1.getValueAt(bankTable1.getSelectedRow(), 0)));
-        inicializujTabulku();
+        inicializujTabulku();}
     }//GEN-LAST:event_vymazButton1ActionPerformed
 
     private void ratingTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ratingTextField1ActionPerformed
