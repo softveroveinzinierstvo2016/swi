@@ -14,12 +14,14 @@ import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -180,7 +182,7 @@ public class adminBankFrame extends javax.swing.JFrame {
     private void pridajButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridajButton1ActionPerformed
         List<Boolean> vyplnenost = new ArrayList<>();
         Boolean mozesUlozit = true;
-        if (menoTextField1.getText().length() < 50 && menoTextField1.getText()!=null &&  menoTextField1.getText().length()>0) {
+        if (menoTextField1.getText()!=null && menoTextField1.getText().length() < 50 && menoTextField1.getText().length()>0) {
             novaBanka = new Bank();
             novaBanka.setName(menoTextField1.getText());
             vyplnenost.add(true);
@@ -216,9 +218,10 @@ public class adminBankFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_ratingTextField1ActionPerformed
 
+   
     private void ratingTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ratingTextField1KeyTyped
         char c = evt.getKeyChar();
-        if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE)) {
+        if (Character.isLetter(c) && !evt.isAltDown()) {
             evt.consume();
         }
 
