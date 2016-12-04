@@ -7,7 +7,9 @@ package core.frames;
 
 import core.db.entity.User;
 import core.db.entity.Bank;
+import core.db.impl.BankDaoImpl;
 import core.db.impl.UserDaoImpl;
+import core.db.ints.BankDao;
 import core.db.ints.UserDao;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -27,7 +29,7 @@ import javax.swing.table.TableModel;
  */
 public class adminUserFrame extends javax.swing.JFrame {
 
-    
+    private static BankDao bankDao = new BankDaoImpl();
     private static UserDao userDao = new UserDaoImpl();    /**
      * Creates new form adminBankFrame
      */
@@ -115,12 +117,22 @@ public class adminUserFrame extends javax.swing.JFrame {
         menoLabel1.setText("Meno:");
 
         bankaComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        bankaComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bankaComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Banka:");
 
         rolaLabel2.setText("Rola:");
 
         rolaComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        rolaComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rolaComboBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -218,6 +230,20 @@ public class adminUserFrame extends javax.swing.JFrame {
             userDao.saveUser(novyUser);
         }
     }//GEN-LAST:event_pridajButton1ActionPerformed
+
+    private void rolaComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rolaComboBox1ActionPerformed
+        rolaComboBox1.addItem("administrator");
+        rolaComboBox1.addItem("bank");
+        rolaComboBox1.addItem("user");
+    }//GEN-LAST:event_rolaComboBox1ActionPerformed
+
+    private void bankaComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankaComboBox1ActionPerformed
+        List<Bank> banky = bankDao.getAll();
+        for (int i = 0; i < banky.size(); i++) {
+            Long idB = banky.get(i).getId();
+            bankaComboBox1.addItem(idB.toString());
+        }
+    }//GEN-LAST:event_bankaComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments

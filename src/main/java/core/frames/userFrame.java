@@ -65,15 +65,13 @@ public class userFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pocetRokovComboBox = new javax.swing.JComboBox<>();
         pocetRokovLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ponukyTable = new javax.swing.JTable();
         sumaLabel = new javax.swing.JLabel();
         sumaTextField = new javax.swing.JTextField();
         vyhladajButton = new javax.swing.JButton();
-
-        pocetRokovComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        rokyField1 = new javax.swing.JTextField();
 
         pocetRokovLabel.setText("Pocet rokov:");
 
@@ -117,9 +115,9 @@ public class userFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pocetRokovLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(pocetRokovComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rokyField1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
                         .addComponent(sumaLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(sumaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -132,11 +130,11 @@ public class userFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pocetRokovComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pocetRokovLabel)
                     .addComponent(sumaLabel)
                     .addComponent(sumaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vyhladajButton))
+                    .addComponent(vyhladajButton)
+                    .addComponent(rokyField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(168, Short.MAX_VALUE))
@@ -153,9 +151,9 @@ public class userFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<String> pocetRokovComboBox;
     private javax.swing.JLabel pocetRokovLabel;
     private javax.swing.JTable ponukyTable;
+    private javax.swing.JTextField rokyField1;
     private javax.swing.JLabel sumaLabel;
     private javax.swing.JTextField sumaTextField;
     private javax.swing.JButton vyhladajButton;

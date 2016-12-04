@@ -32,6 +32,7 @@ public class bankFrame extends javax.swing.JFrame {
 private User userF;
 
     private static ConditionDao podmienkaDao = new ConditionDaoImpl();
+    private Condition podm;
     
     public void inicializujTabulku(){
     DefaultTableModel tableModel = (DefaultTableModel)podmienkyTable.getModel();
@@ -70,10 +71,11 @@ private User userF;
         jScrollPane1 = new javax.swing.JScrollPane();
         podmienkyTable = new javax.swing.JTable();
         pridatPodmienkuButton = new javax.swing.JButton();
-        zmazatPodmienkuButton = new javax.swing.JButton();
-        neaktivneRadioButton = new javax.swing.JRadioButton();
-        vsetky = new javax.swing.JRadioButton();
-        aktivneRadioButton = new javax.swing.JRadioButton();
+        editovatPodmienkuButton2 = new javax.swing.JButton();
+        podmienkyComboBox1 = new javax.swing.JComboBox<>();
+        znamienkoComboBox1 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
@@ -98,69 +100,77 @@ private User userF;
         });
         jScrollPane1.setViewportView(podmienkyTable);
 
-        pridatPodmienkuButton.setText("Pridat podmienku");
+        pridatPodmienkuButton.setText("Zobrazit podmienky");
         pridatPodmienkuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pridatPodmienkuButtonActionPerformed(evt);
             }
         });
 
-        zmazatPodmienkuButton.setText("Zmazat podmienku");
-        zmazatPodmienkuButton.addActionListener(new java.awt.event.ActionListener() {
+        editovatPodmienkuButton2.setText("Editovat podmienku");
+        editovatPodmienkuButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                zmazatPodmienkuButtonActionPerformed(evt);
+                editovatPodmienkuButton2ActionPerformed(evt);
             }
         });
 
-        neaktivneRadioButton.setText("neaktivne");
-
-        vsetky.setText("vsetky");
-
-        aktivneRadioButton.setText("aktivne");
-        aktivneRadioButton.addActionListener(new java.awt.event.ActionListener() {
+        podmienkyComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        podmienkyComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aktivneRadioButtonActionPerformed(evt);
+                podmienkyComboBox1ActionPerformed(evt);
             }
         });
+
+        znamienkoComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        znamienkoComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                znamienkoComboBox1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Podmienka:");
+
+        jLabel2.setText("Znamienko");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(editovatPodmienkuButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pridatPodmienkuButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pridatPodmienkuButton))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(zmazatPodmienkuButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(podmienkyComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(vsetky)
-                            .addComponent(neaktivneRadioButton)
-                            .addComponent(aktivneRadioButton))
-                        .addGap(19, 19, 19))))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(znamienkoComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(70, 70, 70))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(34, 34, 34)
                 .addComponent(pridatPodmienkuButton)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(aktivneRadioButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(zmazatPodmienkuButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(neaktivneRadioButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(vsetky)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editovatPodmienkuButton2)
+                    .addComponent(podmienkyComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(znamienkoComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -175,14 +185,25 @@ private User userF;
         inicializujTabulku();
     }//GEN-LAST:event_pridatPodmienkuButtonActionPerformed
 
-    private void zmazatPodmienkuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zmazatPodmienkuButtonActionPerformed
-        podmienkaDao.deleteCondition(podmienkaDao.getById((long) podmienkyTable.getValueAt(podmienkyTable.getSelectedRow(), 0)));
-        inicializujTabulku();
-    }//GEN-LAST:event_zmazatPodmienkuButtonActionPerformed
+    private void podmienkyComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_podmienkyComboBox1ActionPerformed
+        List<Condition> podmienky = podmienkaDao.getAll();
+        for (int i = 0; i < podmienky.size(); i++) {
+            Long id = podmienky.get(i).getId();
+            podmienkyComboBox1.addItem(id.toString());
+        }
+    }//GEN-LAST:event_podmienkyComboBox1ActionPerformed
 
-    private void aktivneRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aktivneRadioButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_aktivneRadioButtonActionPerformed
+    private void znamienkoComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_znamienkoComboBox1ActionPerformed
+        znamienkoComboBox1.addItem(">");
+        znamienkoComboBox1.addItem("<");
+        znamienkoComboBox1.addItem("=");
+    }//GEN-LAST:event_znamienkoComboBox1ActionPerformed
+
+    private void editovatPodmienkuButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editovatPodmienkuButton2ActionPerformed
+        podm = new Condition();
+        podm = (Condition) podmienkyComboBox1.getSelectedItem();
+        podm.setExpression((String) znamienkoComboBox1.getSelectedItem());
+    }//GEN-LAST:event_editovatPodmienkuButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,13 +211,14 @@ private User userF;
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton aktivneRadioButton;
+    private javax.swing.JButton editovatPodmienkuButton2;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JRadioButton neaktivneRadioButton;
+    private javax.swing.JComboBox<String> podmienkyComboBox1;
     private javax.swing.JTable podmienkyTable;
     private javax.swing.JButton pridatPodmienkuButton;
-    private javax.swing.JRadioButton vsetky;
-    private javax.swing.JButton zmazatPodmienkuButton;
+    private javax.swing.JComboBox<String> znamienkoComboBox1;
     // End of variables declaration//GEN-END:variables
 }

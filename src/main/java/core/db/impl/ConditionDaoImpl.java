@@ -8,6 +8,7 @@ package core.db.impl;
 import core.db.HibernateUtil;
 import core.db.entity.Condition;
 import core.db.ints.ConditionDao;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 
@@ -47,7 +48,11 @@ public class ConditionDaoImpl implements ConditionDao {
     */
     @Override
     public List<Condition> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Condition> conditions = new ArrayList<>();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        conditions = session.createCriteria(Condition.class).list();
+        session.close();
+        return conditions;
     }
     /**
      * vrati podmienku podla id z databazy
