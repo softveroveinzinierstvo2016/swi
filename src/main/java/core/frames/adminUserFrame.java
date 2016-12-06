@@ -51,6 +51,16 @@ public class adminUserFrame extends javax.swing.JFrame {
             tableModel.setValueAt(role, i, 2);
             tableModel.setValueAt(meno, i, 3);
         }
+        rolaComboBox1.removeAllItems();
+        bankaComboBox1.removeAllItems();
+        rolaComboBox1.addItem("administrator");
+        rolaComboBox1.addItem("bank");
+        rolaComboBox1.addItem("user");
+         List<Bank> banky = bankDao.getAll();
+        for (int i = 0; i < banky.size(); i++) {
+            Long idB = banky.get(i).getId();
+            bankaComboBox1.addItem(idB.toString());
+        }
     }
 
     /**
@@ -82,6 +92,7 @@ public class adminUserFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         rolaLabel2 = new javax.swing.JLabel();
         rolaComboBox1 = new javax.swing.JComboBox<>();
+        odhlasitButton1 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -138,6 +149,13 @@ public class adminUserFrame extends javax.swing.JFrame {
             }
         });
 
+        odhlasitButton1.setText("Odhlasit");
+        odhlasitButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                odhlasitButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,33 +163,32 @@ public class adminUserFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 5, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 5, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(vymazButton2)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(vymazButton2)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(pridajButton1)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(rolaLabel2)
+                                .addComponent(pridajButton1)
                                 .addGap(18, 18, 18)
-                                .addComponent(rolaComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(menoLabel1)
-                                .addGap(16, 16, 16)
-                                .addComponent(menoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(bankaComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(35, 35, 35))))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(rolaLabel2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(rolaComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(72, 72, 72)
+                                        .addComponent(jLabel1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(bankaComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(menoLabel1)
+                                        .addGap(16, 16, 16)
+                                        .addComponent(menoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(odhlasitButton1)))))
+                        .addGap(16, 16, 16)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,12 +198,13 @@ public class adminUserFrame extends javax.swing.JFrame {
                     .addComponent(pridajButton1)
                     .addComponent(menoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(menoLabel1)
-                    .addComponent(bankaComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(odhlasitButton1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rolaLabel2)
-                    .addComponent(rolaComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rolaComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(bankaComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(vymazButton2)
                 .addGap(30, 30, 30)
@@ -200,6 +218,7 @@ public class adminUserFrame extends javax.swing.JFrame {
     private void vymazButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vymazButton2ActionPerformed
         userDao.deleteUser(userDao.getById((long) jTable1.getValueAt(jTable1.getSelectedRow(), 0)));
         inicializujTabulku();
+        
     }//GEN-LAST:event_vymazButton2ActionPerformed
 
     private void pridajButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridajButton1ActionPerformed
@@ -221,7 +240,7 @@ public class adminUserFrame extends javax.swing.JFrame {
         }
 
         if (bankaComboBox1.getSelectedIndex() != -1) {
-            novyUser.setIdB((long) bankaComboBox1.getSelectedIndex());
+            novyUser.setIdB((long) bankaComboBox1.getSelectedIndex()+1);
         } else {
             vyplnenost.add(false);
         }
@@ -232,22 +251,21 @@ public class adminUserFrame extends javax.swing.JFrame {
         }
         if (mozesUlozit) {
             userDao.saveUser(novyUser);
+            inicializujTabulku();
         }
     }//GEN-LAST:event_pridajButton1ActionPerformed
 
     private void rolaComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rolaComboBox1ActionPerformed
-        rolaComboBox1.addItem("administrator");
-        rolaComboBox1.addItem("bank");
-        rolaComboBox1.addItem("user");
+        
     }//GEN-LAST:event_rolaComboBox1ActionPerformed
 
     private void bankaComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankaComboBox1ActionPerformed
-        List<Bank> banky = bankDao.getAll();
-        for (int i = 0; i < banky.size(); i++) {
-            Long idB = banky.get(i).getId();
-            bankaComboBox1.addItem(idB.toString());
-        }
+       
     }//GEN-LAST:event_bankaComboBox1ActionPerformed
+
+    private void odhlasitButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_odhlasitButton1ActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_odhlasitButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -257,6 +275,7 @@ public class adminUserFrame extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel menoLabel1;
     private javax.swing.JTextField menoTextField;
+    private javax.swing.JButton odhlasitButton1;
     private javax.swing.JButton pridajButton1;
     private javax.swing.JComboBox<String> rolaComboBox1;
     private javax.swing.JLabel rolaLabel2;

@@ -29,6 +29,7 @@ public class podmienkaFrame extends javax.swing.JFrame {
      */
     public podmienkaFrame(User user) {
         initComponents();
+        inicializujComboboxy();
     }
 
     /**
@@ -145,16 +146,18 @@ public class podmienkaFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void znamienkoComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_znamienkoComboBoxActionPerformed
-        znamienkoComboBox.addItem(">");
-        znamienkoComboBox.addItem("<");
-        znamienkoComboBox.addItem("=");
+        
     }//GEN-LAST:event_znamienkoComboBoxActionPerformed
 
     private void hodnotaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hodnotaTextFieldActionPerformed
 
 
     }//GEN-LAST:event_hodnotaTextFieldActionPerformed
-
+    public void inicializujComboboxy(){
+        znamienkoComboBox.removeAllItems();
+        znamienkoComboBox.addItem(">");
+        znamienkoComboBox.addItem("<");
+        znamienkoComboBox.addItem("=");}
     private void hodnotaTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hodnotaTextFieldKeyTyped
         char c = evt.getKeyChar();
         if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE)) {
@@ -173,15 +176,15 @@ public class podmienkaFrame extends javax.swing.JFrame {
             popisTextArea.setText("Zadajte prosim text");
             vyplnenost.add(false);
         }
-        if (znamienkoComboBox.getSelectedIndex() == 1) {
+        if (znamienkoComboBox.getSelectedIndex() == 0) {
             condition.setExpression(">");
             vyplnenost.add(true);
         }
-        if (znamienkoComboBox.getSelectedIndex() == 2) {
+        if (znamienkoComboBox.getSelectedIndex() == 1) {
             condition.setExpression("<");
             vyplnenost.add(true);
         }
-        if (znamienkoComboBox.getSelectedIndex() == 3) {
+        if (znamienkoComboBox.getSelectedIndex() == 2) {
             condition.setExpression("=");
             vyplnenost.add(true);
         }

@@ -5,9 +5,11 @@
  */
 package core.db.impl;
 
+import core.db.HibernateUtil;
 import core.db.entity.BankCondition;
 import core.db.ints.BankConditionDao;
 import java.util.List;
+import org.hibernate.Session;
 
 
 /**
@@ -23,7 +25,9 @@ public class BankConditionDaoImpl implements BankConditionDao{
     */
     @Override
     public void addBankCondition(BankCondition bankCondition) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.save(bankCondition);
+        session.close();
     }
   /**
      * zmaze Podmienku pre Banku z databazy

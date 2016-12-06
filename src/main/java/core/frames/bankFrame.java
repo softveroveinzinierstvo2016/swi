@@ -74,11 +74,7 @@ private User userF;
         jScrollPane1 = new javax.swing.JScrollPane();
         podmienkyTable = new javax.swing.JTable();
         pridatPodmienkuButton = new javax.swing.JButton();
-        editovatPodmienkuButton2 = new javax.swing.JButton();
-        podmienkyComboBox1 = new javax.swing.JComboBox<>();
-        znamienkoComboBox1 = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        vymazButton2 = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -103,37 +99,14 @@ private User userF;
         });
         jScrollPane1.setViewportView(podmienkyTable);
 
-        pridatPodmienkuButton.setText("Zobrazit podmienky");
+        pridatPodmienkuButton.setText("Pridat podmienku");
         pridatPodmienkuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pridatPodmienkuButtonActionPerformed(evt);
             }
         });
 
-        editovatPodmienkuButton2.setText("Editovat podmienku");
-        editovatPodmienkuButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editovatPodmienkuButton2ActionPerformed(evt);
-            }
-        });
-
-        podmienkyComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        podmienkyComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                podmienkyComboBox1ActionPerformed(evt);
-            }
-        });
-
-        znamienkoComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        znamienkoComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                znamienkoComboBox1ActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Podmienka:");
-
-        jLabel2.setText("Znamienko");
+        vymazButton2.setText("Vymaz podmienku");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,37 +116,22 @@ private User userF;
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(editovatPodmienkuButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pridatPodmienkuButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(podmienkyComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(znamienkoComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(70, 70, 70))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pridatPodmienkuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(vymazButton2)
+                        .addGap(77, 77, 77))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addComponent(pridatPodmienkuButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editovatPodmienkuButton2)
-                    .addComponent(podmienkyComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(znamienkoComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                    .addComponent(pridatPodmienkuButton)
+                    .addComponent(vymazButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -188,37 +146,13 @@ private User userF;
         inicializujTabulku();
     }//GEN-LAST:event_pridatPodmienkuButtonActionPerformed
 
-    private void podmienkyComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_podmienkyComboBox1ActionPerformed
-        List<Condition> podmienky = podmienkaDao.getAll();
-        for (int i = 0; i < podmienky.size(); i++) {
-            Long id = podmienky.get(i).getId();
-            podmienkyComboBox1.addItem(id.toString());
-        }
-    }//GEN-LAST:event_podmienkyComboBox1ActionPerformed
-
-    private void znamienkoComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_znamienkoComboBox1ActionPerformed
-        znamienkoComboBox1.addItem(">");
-        znamienkoComboBox1.addItem("<");
-        znamienkoComboBox1.addItem("=");
-    }//GEN-LAST:event_znamienkoComboBox1ActionPerformed
-
-    private void editovatPodmienkuButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editovatPodmienkuButton2ActionPerformed
-        podm = new Condition();
-        podm = (Condition) podmienkyComboBox1.getSelectedItem();
-        podm.setExpression((String) znamienkoComboBox1.getSelectedItem());
-    }//GEN-LAST:event_editovatPodmienkuButton2ActionPerformed
-
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton editovatPodmienkuButton2;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<String> podmienkyComboBox1;
     private javax.swing.JTable podmienkyTable;
     private javax.swing.JButton pridatPodmienkuButton;
-    private javax.swing.JComboBox<String> znamienkoComboBox1;
+    private javax.swing.JButton vymazButton2;
     // End of variables declaration//GEN-END:variables
 }
