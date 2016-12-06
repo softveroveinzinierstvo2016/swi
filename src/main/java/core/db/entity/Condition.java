@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
  * @author Rastislav
  */
 @Entity
-@Table(name = "Condition")
+@Table(name = "ConditionAll")
 public class Condition {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,14 +35,14 @@ public class Condition {
     @Size(min = 1, max = 50)
     private String expression;
     /**
-     * vracia id podmienky odpovedajuce identifikatoru v tabulke Condition
+     * vracia id podmienky odpovedajuce identifikatoru v tabulke ConditionAll
      * @return id podmienky
      */
     public Long getId() {
         return id;
     }
     /**
-     * nastavuje id podmienky odpovedajuce identifikatoru v tabulke Condition, AUTOINCREMENT
+     * nastavuje id podmienky odpovedajuce identifikatoru v tabulke ConditionAll, AUTOINCREMENT
      * @param id id podmienky
      */
     public void setId(Long id) {
@@ -57,26 +57,28 @@ public class Condition {
     }
     /**
      * nastavuje slovny popis podmienky, ktory vystihuje podstatu expression
-     * @param description slovny popis podmienky,NotNull,lenght=<1,100>
-     * @see getExpression()
-     * @see setExpression(String expression)
+     * @param description slovny popis podmienky,NotNull,dĺžka od 1 do = 100
+     * @see #getExpression()
+     * @see #setExpression(String expression)
      */
     public void setDescription(String description) {
         this.description = description;
     }
     /**
-     * vracia vyraz podmienky pomocou ktorej by sa malo vyhodnotit ci uzivatel splna danu podmienku pre danu banku
-     * vyraz v urcitych pripadoch vyuziva value z BankCondition ako parameter
-     * @return vyraz podmienky !!nevie sa ako by mal vizerat!!
+     * vracia mysql/sql select ktorý po doplnení parametrov id zakaznika, požičaná suma
+     * a vykonani vráti hodnotu záujmu, ktorá sa na základe Mark porovná s value
+     * a určí sa či je vyskladaná podmienka banky splnená
+     * @return sql select čakajúci ako parametre id zakaznika , požičaná sumu 
      * @see BankCondition
      */
     public String getExpression() {
         return expression;
     }
 /**
-     * nastavuje vyraz podmienky pomocou ktorej by sa malo vyhodnotit ci uzivatel splna danu podmienku pre danu banku
-     * vyraz v urcitych pripadoch vyuziva value z BankCondition ako parameter
-     * @param expression NotNull,lenght=<1,50>  !!nevie sa ako by mal vizerat!!
+     * nastavuje mysql/sql select ktorý po doplnení parametrov id zakaznika, požičaná suma
+     * a vykonani vráti hodnotu záujmu, ktorá sa na základe Mark porovná s value
+     * a určí sa či je vyskladaná podmienka banky splnená
+     * @param expression NotNull, dĺžka od 1 do = 50,  select čakajúci ako parametre id zakaznika , požičaná sumu 
      * @see BankCondition
      */
     public void setExpression(String expression) {

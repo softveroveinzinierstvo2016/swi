@@ -56,7 +56,7 @@ public class Bank {
     }
     /**
      * nastavuje meno banky
-    * @param name meno banky, NotNull, Lenght = <1,50>
+    * @param name meno banky, NotNull, dĺžka od 1 do = 50
     */
     public void setName(String name) {
         this.name = name;

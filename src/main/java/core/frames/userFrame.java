@@ -32,6 +32,9 @@ public class userFrame extends javax.swing.JFrame {
 
     private static BankDao bankDao = new BankDaoImpl();
     
+    /***
+     * 
+     */
     public void inicializujTabulku(){
     DefaultTableModel tableModel = (DefaultTableModel)ponukyTable.getModel();
         List<Bank> banky = bankDao.getAll();
@@ -50,6 +53,7 @@ public class userFrame extends javax.swing.JFrame {
     
     /**
      * Creates new form userFrame
+     * @param user prihlaseny uzivatel
      */
     public userFrame(User user) {
         initComponents();

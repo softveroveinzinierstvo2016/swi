@@ -19,6 +19,7 @@ public class adminMainFrame extends javax.swing.JFrame {
 private User userF;
     /**
      * Creates new form adminMainFrame
+     * @param user prihlaseny uzivatel
      */
     public adminMainFrame(User user) {
         initComponents();
@@ -109,9 +110,6 @@ private User userF;
         this.setVisible(false);
     }//GEN-LAST:event_odhlasitButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton odhlasitButton1;

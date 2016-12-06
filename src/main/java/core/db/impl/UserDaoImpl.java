@@ -15,7 +15,6 @@ public class UserDaoImpl implements UserDao {
     /**
     * vrati zoznam vsetkych uzivatelov z databazy
     * @return zoznam uzlivatelov
-    *@throws UnsupportedOperationException
     */
     @Override
     public List<User> getAll() {
@@ -30,7 +29,6 @@ public class UserDaoImpl implements UserDao {
      * @param id id uzivatela
      * @return vrati uzivatela podla zadaneho id
      * @see User
-     *@throws UnsupportedOperationException
     */
     @Override
     public User getById(Long id) {

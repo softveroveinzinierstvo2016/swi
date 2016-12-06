@@ -75,15 +75,15 @@ public class BankCondition {
         this.idB = idB;
     }
     /**
-     * navracia id podmienky pre danu banku
-     * @return  id Podmienky
+     * vracia id podmienky ktorá je nastavená danou bankou
+     * @return id podmienky
      */
     public Long getIdC() {
         return idC;
     }
     /**
      * nastavuje id podmienky ktoru chceme pre danu banku
-     * @param idC, NotNull
+     * @param idC id podmienky NotNull
      */
     public void setIdC(Long idC) {
         this.idC = idC;
@@ -91,10 +91,10 @@ public class BankCondition {
     /**
      * vracia integer ktory reprezentuje porovnavacie znamienko v podmienke<br>
      * 0 = <br>
-     * 1 >= <br>
-     * -1 <= <br>
-     * -2 < <br>
-     * 2 > <br>
+     * 1 &gt= <br>
+     * -1 &lt= <br>
+     * -2 &lt <br>
+     * 2 &gt <br>
      * @return cislo reprezentujuce porovnavacie znamienko 
      */
     public Integer getMark() {
@@ -103,26 +103,26 @@ public class BankCondition {
     /**
      * nastavuje integer ktory reprezentuje porovnavacie znamienko v podmienke<br>
      * 0 = <br>
-     * 1 >= <br>
-     * -1 <= <br>
-     * -2 < <br>
-     * 2 > <br>
+     * 1 &gt= <br>
+     * -1 &lt= <br>
+     * -2 &lt <br>
+     * 2 &gt <br>
      * @param mark cislo reprezentujuce porovnavacie znamienko, Set{-2,-1,0,1,2}
      */
     public void setMark(Integer mark) {
         this.mark = mark;
     }
     /**
-     * vracia hodnotu ktora je sucastou vyrazu pre danu podmienku
-     * @return hodnota pre vyraz podmienky
+     * vracia hodnotu s ktorou sa porovnava hodnota záujmu 
+     * @return hodnota s ktorou sa porovnava hodnota záujmu
      * @see Condition
      */
     public Integer getValue() {
         return value;
     }
     /**
-     * nastavuje hodnotu ktora je sucastou vyrazu pre danu podmienku
-     * @param value hodnota pre vyraz podmienky, NotNull
+     * nastavuje hodnotu s ktorou sa porovnava hodnota záujmu
+     * @param value hodnota s ktorou sa porovnava hodnota záujmu, NotNull
      * @see Condition
      */
     public void setValue(Integer value) {

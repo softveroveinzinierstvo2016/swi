@@ -44,7 +44,6 @@ public class ConditionDaoImpl implements ConditionDao {
      * vrati vsetky podmienky z databazy
      * @return zoznam podmienok
      * @see Condition
-    *@throws UnsupportedOperationException
     */
     @Override
     public List<Condition> getAll() {
@@ -59,7 +58,6 @@ public class ConditionDaoImpl implements ConditionDao {
      * @param id id podmienky
      * @return vracia podmienku
      * @see Condition
-    *@throws UnsupportedOperationException
     */
     @Override
     public Condition getById(Long id) {
@@ -69,7 +67,6 @@ public class ConditionDaoImpl implements ConditionDao {
      * upravi parametre podmienky s danym id z databazy
      * @param condition podmienka s tymto id sa upravi podla tohto objektu
      * @see Condition
-     *@throws UnsupportedOperationException
     */
     @Override
     public void updateCondition(Condition condition) {

@@ -31,11 +31,11 @@ public class adminBankFrame extends javax.swing.JFrame {
 
     private static BankDao bankDao = new BankDaoImpl();
 
-    /**
-     * Creates new form userAdminFrame
-     */
- public void inicializujTabulku(){
- DefaultTableModel tableModel = (DefaultTableModel)bankTable1.getModel();
+   /***
+    * vlozi do tablulky vsetky banky v systeme
+    */ 
+    public void inicializujTabulku() {
+        DefaultTableModel tableModel = (DefaultTableModel) bankTable1.getModel();
         List<Bank> banky = bankDao.getAll();
         bankTable1.removeAll();
         tableModel.setNumRows(banky.size());
@@ -47,13 +47,18 @@ public class adminBankFrame extends javax.swing.JFrame {
             tableModel.setValueAt(id, i, 0);
             tableModel.setValueAt(meno, i, 1);
             tableModel.setValueAt(rating, i, 2);
-            }}
+        }
+    }
 
+    /***
+     * Creates new form userAdminFrame
+     * @param user prihlaseny uzivatel
+     * @throws SQLException
+     */
     public adminBankFrame(User user) throws SQLException {
-        initComponents();    
-      inicializujTabulku();
-       
-        
+        initComponents();
+        inicializujTabulku();
+
     }
 
     /**
@@ -178,23 +183,23 @@ public class adminBankFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void pridajButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridajButton1ActionPerformed
         List<Boolean> vyplnenost = new ArrayList<>();
         Boolean mozesUlozit = true;
-        if (menoTextField1.getText()!=null && menoTextField1.getText().length() < 50 && menoTextField1.getText().length()>0) {
+        if (menoTextField1.getText() != null && menoTextField1.getText().length() < 50 && menoTextField1.getText().length() > 0) {
             novaBanka = new Bank();
             novaBanka.setName(menoTextField1.getText());
             vyplnenost.add(true);
         } else {
-      //      menoTextField1.setText("Nespravne vyplnene data");
+            //      menoTextField1.setText("Nespravne vyplnene data");
             vyplnenost.add(false);
         }
-        if (ratingTextField1.getText() != null || ratingTextField1.getText().equals("") ) {
+        if (ratingTextField1.getText() != null || ratingTextField1.getText().equals("")) {
             novaBanka.setPrimeInterestRate(Double.parseDouble(ratingTextField1.getText()));
             vyplnenost.add(true);
         } else {
-      //      ratingTextField1.setText("Nevyplnený rating");
+            //      ratingTextField1.setText("Nevyplnený rating");
             vyplnenost.add(false);
         }
         for (Boolean boolean1 : vyplnenost) {
@@ -209,16 +214,17 @@ public class adminBankFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_pridajButton1ActionPerformed
 
     private void vymazButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vymazButton1ActionPerformed
-        if(bankTable1.getSelectedRow() >=0){
-        bankDao.deleteBank(bankDao.getById((long)  bankTable1.getValueAt(bankTable1.getSelectedRow(), 0)));
-        inicializujTabulku();}
+        if (bankTable1.getSelectedRow() >= 0) {
+            bankDao.deleteBank(bankDao.getById((long) bankTable1.getValueAt(bankTable1.getSelectedRow(), 0)));
+            inicializujTabulku();
+        }
     }//GEN-LAST:event_vymazButton1ActionPerformed
 
     private void ratingTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ratingTextField1ActionPerformed
 
     }//GEN-LAST:event_ratingTextField1ActionPerformed
 
-   
+
     private void ratingTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ratingTextField1KeyTyped
         char c = evt.getKeyChar();
         if (Character.isLetter(c) && !evt.isAltDown()) {
@@ -228,7 +234,7 @@ public class adminBankFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_ratingTextField1KeyTyped
 
     private void zatvoritButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zatvoritButton1ActionPerformed
-       this.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_zatvoritButton1ActionPerformed
 
 

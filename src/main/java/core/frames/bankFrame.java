@@ -33,7 +33,9 @@ private User userF;
 
     private static ConditionDao podmienkaDao = new ConditionDaoImpl();
     private Condition podm;
-    
+     /***
+    * vlozi do tablulky všetky podmienky nastavene bankou
+    */ 
     public void inicializujTabulku(){
     DefaultTableModel tableModel = (DefaultTableModel)podmienkyTable.getModel();
         List<Condition> podmienky = podmienkaDao.getAll();
@@ -51,6 +53,7 @@ private User userF;
     }
     /**
      * Creates new form bankFrame
+     * @param user prihlaseny uzivatel
      */
     public bankFrame(User user) {
         userF = user;
@@ -205,9 +208,6 @@ private User userF;
         podm.setExpression((String) znamienkoComboBox1.getSelectedItem());
     }//GEN-LAST:event_editovatPodmienkuButton2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

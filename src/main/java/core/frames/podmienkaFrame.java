@@ -25,6 +25,7 @@ public class podmienkaFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form podmienkaFrame
+     * @param user prihlaseny uzivatel
      */
     public podmienkaFrame(User user) {
         initComponents();

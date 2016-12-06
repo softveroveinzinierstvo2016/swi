@@ -30,12 +30,13 @@ import javax.swing.table.TableModel;
 public class adminUserFrame extends javax.swing.JFrame {
 
     private static BankDao bankDao = new BankDaoImpl();
-    private static UserDao userDao = new UserDaoImpl();    /**
-     * Creates new form adminBankFrame
+    private static UserDao userDao = new UserDaoImpl();
+
+    /***
+     * vlozi do tablulky všetkých používateľov v systéme
      */
-    
-     public void inicializujTabulku(){
-        DefaultTableModel tableModel = (DefaultTableModel)jTable1.getModel();
+    public void inicializujTabulku() {
+        DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
         List<User> users = userDao.getAll();
         jTable1.removeAll();
         tableModel.setNumRows(users.size());
@@ -49,15 +50,18 @@ public class adminUserFrame extends javax.swing.JFrame {
             tableModel.setValueAt(idB, i, 1);
             tableModel.setValueAt(role, i, 2);
             tableModel.setValueAt(meno, i, 3);
-            }
-     }
+        }
+    }
 
+    /**
+     * Creates new form adminBankFrame
+     *
+     * @param user prihaseny uzivatel
+     */
     public adminUserFrame(User user) {
         initComponents();
         inicializujTabulku();
     }
-
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -194,12 +198,12 @@ public class adminUserFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void vymazButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vymazButton2ActionPerformed
-        userDao.deleteUser(userDao.getById((long)  jTable1.getValueAt(jTable1.getSelectedRow(), 0)));
+        userDao.deleteUser(userDao.getById((long) jTable1.getValueAt(jTable1.getSelectedRow(), 0)));
         inicializujTabulku();
     }//GEN-LAST:event_vymazButton2ActionPerformed
 
     private void pridajButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pridajButton1ActionPerformed
-         List<Boolean> vyplnenost = new ArrayList<>();
+        List<Boolean> vyplnenost = new ArrayList<>();
         Boolean mozesUlozit = true;
         if (menoTextField.getText().length() < 50) {
             novyUser = new User();
@@ -209,13 +213,13 @@ public class adminUserFrame extends javax.swing.JFrame {
             menoTextField.setText("Nespravne vyplnene data");
             vyplnenost.add(false);
         }
-        
+
         if (rolaComboBox1.getSelectedIndex() != -1) {
             novyUser.setRole(rolaComboBox1.getItemAt(rolaComboBox1.getSelectedIndex()));
         } else {
             vyplnenost.add(false);
         }
-        
+
         if (bankaComboBox1.getSelectedIndex() != -1) {
             novyUser.setIdB((long) bankaComboBox1.getSelectedIndex());
         } else {
@@ -245,10 +249,6 @@ public class adminUserFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bankaComboBox1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> bankaComboBox1;

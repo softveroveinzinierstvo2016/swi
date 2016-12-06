@@ -20,7 +20,6 @@ public class BankConditionDaoImpl implements BankConditionDao{
      * prida Podmienku pre Banku do databazy
      * @param bankCondition objekt BankCondition na pridanie
      * @see BankCondition
-     *@throws UnsupportedOperationException
     */
     @Override
     public void addBankCondition(BankCondition bankCondition) {
@@ -30,7 +29,6 @@ public class BankConditionDaoImpl implements BankConditionDao{
      * zmaze Podmienku pre Banku z databazy
      * @param bankCondition objekt BankCondition na zmazanie
      * @see BankCondition
-    *@throws UnsupportedOperationException
     */
     @Override
     public void deleteBankCondition(BankCondition bankCondition) {
@@ -40,7 +38,6 @@ public class BankConditionDaoImpl implements BankConditionDao{
    * vrati vsetky Podmienky pre Banku z databazy
      * @return zoznam Podmienok pre Banku
      * @see BankCondition
-    *@throws UnsupportedOperationException
     */
     @Override
     public List<BankCondition> getAll() {
@@ -51,7 +48,6 @@ public class BankConditionDaoImpl implements BankConditionDao{
      * @param id identifikator Podmienky pre Banku
      * @return objekt BankCondition
      * @see BankCondition
-    *@throws UnsupportedOperationException
     */
     @Override
     public BankCondition getById(Long id) {
@@ -61,7 +57,6 @@ public class BankConditionDaoImpl implements BankConditionDao{
    *  upravi Podmienku pre Banku v databaze
      * @param bankCondition ako sa ma Podmienka pre Banku upravit
      * @see BankCondition
-    *@throws UnsupportedOperationException
     */
     @Override
     public void updateBankCondition(BankCondition bankCondition) {
