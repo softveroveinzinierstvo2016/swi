@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
  * @author Rastislav
  */
 @Entity
-@Table(name = "InfoCondition")
+@Table(name = "infocondition")
 public class Condition {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

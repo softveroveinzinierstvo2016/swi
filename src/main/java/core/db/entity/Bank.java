@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
  * @author Rastislav
  */
 @Entity
-@Table(name = "Bank")
+@Table(name = "bank")
 public class Bank {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

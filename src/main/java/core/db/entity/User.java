@@ -23,7 +23,7 @@ import javax.validation.constraints.Size;
  * @since 2016-04-25
  */
 @Entity
-@Table(name = "User")
+@Table(name = "user")
 public class User implements java.io.Serializable {
 
     @Id
