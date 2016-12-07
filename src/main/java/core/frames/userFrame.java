@@ -19,6 +19,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JTable;
@@ -38,17 +39,48 @@ public class userFrame extends javax.swing.JFrame {
     public void inicializujTabulku(){
     DefaultTableModel tableModel = (DefaultTableModel)ponukyTable.getModel();
         List<Bank> banky = bankDao.getAll();
+        List<Bank> temp = banky;
+        sort(temp);
         ponukyTable.removeAll();
-        tableModel.setNumRows(banky.size());
-        for (int i = 0; i < banky.size(); i++) {
-            Long id = banky.get(i).getId();
-            String meno = banky.get(i).getName();
-            Double rating = banky.get(i).getPrimeInterestRate();
-            Object[] data = {id, meno, rating};
-            tableModel.setValueAt(id, i, 0);
-            tableModel.setValueAt(meno, i, 1);
-            tableModel.setValueAt(rating, i, 2);
+        tableModel.setNumRows(temp.size());
+        for (int i = temp.size()-1; i >= 0; i--) {
+           Long id = temp.get(i).getId();
+           String meno = temp.get(i).getName();
+           Double rating = temp.get(i).getPrimeInterestRate();
+           Object[] data = {id, meno, rating};
+           tableModel.setValueAt(id, i, 0);
+           tableModel.setValueAt(meno, i, 1);
+           tableModel.setValueAt(rating, i, 2);
+           }
+    }
+    
+    public static void sort(List<Bank> list) {
+        sort(list, 0, list.size() - 1);
+    }
+
+    public static void sort(List<Bank> list, int from, int to) {
+        if (from < to) {
+            int pivot = from;
+            int left = from + 1;
+            int right = to;
+            Double pivotValue = list.get(pivot).getPrimeInterestRate();
+            while (left <= right) {
+                // left <= to -> limit protection
+                while (left <= to && pivotValue >= list.get(left).getPrimeInterestRate()) {
+                    left++;
+                }
+                // right > from -> limit protection
+                while (right > from && pivotValue < list.get(right).getPrimeInterestRate()) {
+                    right--;
+                }
+                if (left < right) {
+                    Collections.swap(list, left, right);
+                }
             }
+            Collections.swap(list, pivot, left - 1);
+            sort(list, from, right - 1); 
+            sort(list, right + 1, to);  
+        }
     }
     
     /**
