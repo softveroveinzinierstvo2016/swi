@@ -38,6 +38,7 @@ private User userF;
         spravaKlientovButton1 = new javax.swing.JButton();
         spravaBankButton2 = new javax.swing.JButton();
         odhlasitButton1 = new javax.swing.JButton();
+        spravaPodmienokButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -62,19 +63,31 @@ private User userF;
             }
         });
 
+        spravaPodmienokButton1.setText("Sprava Podmienok");
+        spravaPodmienokButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                spravaPodmienokButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addComponent(spravaKlientovButton1)
-                .addGap(52, 52, 52)
-                .addComponent(spravaBankButton2)
-                .addContainerGap(67, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(odhlasitButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(odhlasitButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(spravaPodmienokButton1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(spravaKlientovButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(spravaBankButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 62, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -86,7 +99,9 @@ private User userF;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(spravaKlientovButton1)
                     .addComponent(spravaBankButton2))
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(spravaPodmienokButton1)
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         pack();
@@ -110,10 +125,16 @@ private User userF;
         this.setVisible(false);
     }//GEN-LAST:event_odhlasitButton1ActionPerformed
 
+    private void spravaPodmienokButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spravaPodmienokButton1ActionPerformed
+        podmienkaFrame podFrame = new podmienkaFrame(userF);
+        podFrame.setVisible(true);
+    }//GEN-LAST:event_spravaPodmienokButton1ActionPerformed
+
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton odhlasitButton1;
     private javax.swing.JButton spravaBankButton2;
     private javax.swing.JButton spravaKlientovButton1;
+    private javax.swing.JButton spravaPodmienokButton1;
     // End of variables declaration//GEN-END:variables
 }

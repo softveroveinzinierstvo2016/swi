@@ -240,7 +240,7 @@ public class adminUserFrame extends javax.swing.JFrame {
         }
 
         if (bankaComboBox1.getSelectedIndex() != -1) {
-            novyUser.setIdB((long) bankaComboBox1.getSelectedIndex()+1);
+            novyUser.setIdB((long) bankaComboBox1.getSelectedItem());
         } else {
             vyplnenost.add(false);
         }

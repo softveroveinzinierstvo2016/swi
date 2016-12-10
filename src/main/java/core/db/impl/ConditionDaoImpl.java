@@ -10,7 +10,10 @@ import core.db.entity.Condition;
 import core.db.ints.ConditionDao;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -36,9 +39,30 @@ public class ConditionDaoImpl implements ConditionDao {
      */
     @Override
     public void deleteCondition(Condition condition) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.delete(condition);
-        session.close();
+        Transaction tx = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            tx = session.beginTransaction();
+            tx.setTimeout(5);
+
+            session.delete(condition);
+
+            tx.commit();
+
+        } catch (RuntimeException e) {
+            try {
+                tx.rollback();
+            } catch (RuntimeException rbe) {
+
+            }
+            throw e;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+
+        }
     }
     /**
      * vrati vsetky podmienky z databazy
@@ -61,7 +85,17 @@ public class ConditionDaoImpl implements ConditionDao {
     */
     @Override
     public Condition getById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(Condition.class);
+        criteria.add(Restrictions.eq("id", id));
+        List<Condition> conditions = criteria.list();
+        if(conditions.get(0)!=null){
+        Condition condition = conditions.get(0);
+        session.close();
+        return condition;}
+        else {
+            session.close();
+            return null;}
     }
      /**
      * upravi parametre podmienky s danym id z databazy

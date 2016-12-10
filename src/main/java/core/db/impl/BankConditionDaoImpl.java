@@ -8,8 +8,12 @@ package core.db.impl;
 import core.db.HibernateUtil;
 import core.db.entity.BankCondition;
 import core.db.ints.BankConditionDao;
+import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 
 /**
@@ -36,7 +40,30 @@ public class BankConditionDaoImpl implements BankConditionDao{
     */
     @Override
     public void deleteBankCondition(BankCondition bankCondition) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Transaction tx = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            tx = session.beginTransaction();
+            tx.setTimeout(5);
+
+            session.delete(bankCondition);
+
+            tx.commit();
+
+        } catch (RuntimeException e) {
+            try {
+                tx.rollback();
+            } catch (RuntimeException rbe) {
+
+            }
+            throw e;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+
+        }
     }
   /**
    * vrati vsetky Podmienky pre Banku z databazy
@@ -45,7 +72,11 @@ public class BankConditionDaoImpl implements BankConditionDao{
     */
     @Override
     public List<BankCondition> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<BankCondition> bankConditions = new ArrayList<>();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        bankConditions = session.createCriteria(BankCondition.class).list();
+        session.close();
+        return bankConditions;
     }
   /**
    * vrati Podmienku pre Banku podla id z databazy
@@ -55,7 +86,17 @@ public class BankConditionDaoImpl implements BankConditionDao{
     */
     @Override
     public BankCondition getById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(BankCondition.class);
+        criteria.add(Restrictions.eq("id", id));
+        List<BankCondition> bankConditions = criteria.list();
+        if(bankConditions.get(0)!=null){
+        BankCondition bankCondition = bankConditions.get(0);
+        session.close();
+        return bankCondition;}
+        else {
+            session.close();
+            return null;}
     }
   /**
    *  upravi Podmienku pre Banku v databaze
