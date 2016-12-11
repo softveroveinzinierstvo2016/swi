@@ -318,6 +318,7 @@ private User userF;
             }
             
             bankConditionDao.addBankCondition(bankCond);
+            inicializujTabulku();
         }
     }//GEN-LAST:event_pridatPodmienkuButtonActionPerformed
 

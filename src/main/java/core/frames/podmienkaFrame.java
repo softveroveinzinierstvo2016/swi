@@ -203,6 +203,7 @@ public class podmienkaFrame extends javax.swing.JFrame {
         }
         if (mozesUlozit) {
             conditionDao.addCondition(condition);
+            inicializujTabulku();
         }
     }//GEN-LAST:event_pridatButtonActionPerformed
 
