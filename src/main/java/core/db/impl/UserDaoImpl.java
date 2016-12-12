@@ -8,14 +8,17 @@ import org.hibernate.Session;
 import java.util.List;
 import java.util.logging.Logger;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 public class UserDaoImpl implements UserDao {
+
     /**
-    * vrati zoznam vsetkych uzivatelov z databazy
-    * @return zoznam uzlivatelov
-    */
+     * vrati zoznam vsetkych uzivatelov z databazy
+     *
+     * @return zoznam uzlivatelov
+     */
     @Override
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
@@ -24,12 +27,14 @@ public class UserDaoImpl implements UserDao {
         session.close();
         return users;
     }
+
     /**
      * vrati uzivatela podla id z databazy
+     *
      * @param id id uzivatela
      * @return vrati uzivatela podla zadaneho id
      * @see User
-    */
+     */
     @Override
     public User getById(Long id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -40,20 +45,23 @@ public class UserDaoImpl implements UserDao {
         session.close();
         return user;
     }
-      /**
+
+    /**
      * overi ci uzivatel so zadanym menom splna podmienky verifikacie <br>
      * ak splna podmienky vrati ho ako objekt, inak vracia null
+     *
      * @param name meno uzivatela ktory sa chce prihlasit
-     * @return vracia objekt User s menom name ak splna podmienky verifikacie, inak vracia null
+     * @return vracia objekt User s menom name ak splna podmienky verifikacie,
+     * inak vracia null
      * @see User
      */
     @Override
     public User getVerifedUser(String name) {
-        System.out.println("menooo"+name );
+        System.out.println("menooo" + name);
         Session session = HibernateUtil.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(User.class);
         criteria.add(Restrictions.eq("name", name));
-        System.out.println("crteraia: "+criteria.list().toString());
+        System.out.println("crteraia: " + criteria.list().toString());
         List<User> users = criteria.list();
         if (users.size() > 1) {
             return null;
@@ -67,9 +75,10 @@ public class UserDaoImpl implements UserDao {
             return user;
         }
     }
-    
+
     /**
      * prida usera do databazy
+     *
      * @param user objekt User, ktory bude pridany
      * @see User
      */
@@ -79,9 +88,10 @@ public class UserDaoImpl implements UserDao {
         session.save(user);
         session.close();
     }
-    
+
     /**
      * maze usera z databazy
+     *
      * @param user objekt User, ktory bude zmazany
      * @see User
      */
@@ -114,6 +124,23 @@ public class UserDaoImpl implements UserDao {
 
     }
 
-   
-    
+    @Override
+    public List<User> findSortedClients(Long idBanky) {
+       
+        List<Integer> zoznamIdUserov = new ArrayList<>();
+        List<User> klienti = new ArrayList<>();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query result = session.createQuery("select ...").setParameter("idBanky", idBanky);
+        if (result == null) {
+            return null;
+        }
+        for (final Object o : result.list()) {
+            zoznamIdUserov.add((Integer) o);
+        }
+        for(Integer i : zoznamIdUserov){
+            klienti.add(getById((long)i));
+        }
+        return klienti;
+    }
+
 }

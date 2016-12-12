@@ -121,6 +121,7 @@ public class userFrame extends javax.swing.JFrame {
         sumaTextField = new javax.swing.JTextField();
         vyhladajButton = new javax.swing.JButton();
         rokyField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         pocetRokovLabel.setText("Pocet rokov:");
 
@@ -160,6 +161,13 @@ public class userFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Odhlasit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -179,11 +187,15 @@ public class userFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(vyhladajButton)))
                 .addContainerGap(59, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addComponent(jButton1)
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pocetRokovLabel)
                     .addComponent(sumaLabel)
@@ -206,8 +218,12 @@ public class userFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_sumaTextFieldActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+                     this.setVisible(false);    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel pocetRokovLabel;
     private javax.swing.JTable ponukyTable;
