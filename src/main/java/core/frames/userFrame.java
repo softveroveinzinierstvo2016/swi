@@ -42,7 +42,7 @@ public class userFrame extends javax.swing.JFrame {
             List<BankCondition> bankConditions = bankConditionDao.getByIdB(bank.getId());
             for (BankCondition bankCondition : bankConditions) {
                 for (Condition condition : conditions) {
-                    if (conditionDao.executeEpresion(condition.getExpression(), user.getId(), suma)) {
+                    if (conditionDao.executeEpresion(condition.getExpression(), user.getId(), suma ,bankCondition.getMark(),bankCondition.getValue())) {
                         Double tmpRate = bank.getPrimeInterestRate();
                         tmpRate -= bankCondition.getChangeInterestRate();
                         bank.setPrimeInterestRate(tmpRate);
@@ -219,7 +219,7 @@ public class userFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_sumaTextFieldActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-                     this.setVisible(false);    }//GEN-LAST:event_jButton1ActionPerformed
+        this.setVisible(false);    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

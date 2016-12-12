@@ -119,10 +119,10 @@ public class ConditionDaoImpl implements ConditionDao {
     }
 
     @Override
-    public boolean executeEpresion(String select, long idUsera, double pozicanaSuma) {
+    public boolean executeEpresion(String select, long idUsera, double pozicanaSuma, int mark,int bcValue) {
         int vysledok = 0;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Query result = session.createQuery(select).setParameter("idUsera", idUsera).setParameter("pozicanaSuma", pozicanaSuma);
+        Query result = session.createQuery(select).setParameter("idUsera", idUsera).setParameter("pozicanaSuma", pozicanaSuma).setParameter("mark", mark).setParameter("bcValue", bcValue);
         if (result == null) {
             return false;
         }
