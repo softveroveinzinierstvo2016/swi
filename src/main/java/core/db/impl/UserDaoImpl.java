@@ -131,7 +131,7 @@ public class UserDaoImpl implements UserDao {
         List<User> klienti = new ArrayList<>();
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query result = session.createQuery("(select T.id from (\n" +
-"select U.id,sum(statement) 'vysl' from myuser U  left join myaccountstatements ACS on U.id = ACS.idU where U.idB = :idBanky and role = 'user' and  month(ACS.time)=month(now()-interval 1 month) and year(ACS.time)=year(now()-interval 1 month) and statement is not null and monthly_balance is null and statement > 0 group by U.id order by 'vysl'\n" +
+"select U.id,sum(statement) 'vysl' from user U  left join accountstatements ACS on U.id = ACS.idU where U.idB = :idBanky and role = 'user' and  month(ACS.time)=month(now()-interval 1 month) and year(ACS.time)=year(now()-interval 1 month) and statement is not null and monthly_balance is null and statement > 0 group by U.id order by 'vysl'\n" +
 ")T order by T.vysl)").setParameter("idBanky", idBanky);
         if (result == null) {
             return null;
