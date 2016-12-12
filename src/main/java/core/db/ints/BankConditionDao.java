@@ -43,4 +43,6 @@ public interface BankConditionDao {
      * @see BankCondition
      */
     void updateBankCondition(BankCondition bankCondition);
+    
+    List<BankCondition> getByIdB(Long id);
 }

@@ -107,5 +107,20 @@ public class BankConditionDaoImpl implements BankConditionDao{
     public void updateBankCondition(BankCondition bankCondition) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<BankCondition> getByIdB(Long idB) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(BankCondition.class);
+        criteria.add(Restrictions.eq("idB", idB));
+        List<BankCondition> bankConditions = criteria.list();
+        if(bankConditions!=null){
+            session.close();
+           return bankConditions;
+         }
+        else {
+            session.close();
+            return null;}   
+    }
     
 }

@@ -44,4 +44,6 @@ public interface ConditionDao {
      * @see Condition
      */
     void updateCondition(Condition condition);
+    
+    boolean executeEpresion(String select,long idUsera, double pozicanaSuma);
 }

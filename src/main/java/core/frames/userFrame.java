@@ -4,27 +4,21 @@
  * and open the template in the editor.
  */
 package core.frames;
+
 import core.db.entity.User;
 import core.db.entity.Bank;
+import core.db.entity.BankCondition;
 import core.db.entity.Condition;
+import core.db.impl.BankConditionDaoImpl;
 import core.db.impl.BankDaoImpl;
 import core.db.impl.ConditionDaoImpl;
-import core.db.impl.UserDaoImpl;
+import core.db.ints.BankConditionDao;
 import core.db.ints.BankDao;
 import core.db.ints.ConditionDao;
-import core.db.ints.UserDao;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Vector;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+
 /**
  *
  * @author Rastislav, Martin
@@ -32,28 +26,45 @@ import javax.swing.table.TableModel;
 public class userFrame extends javax.swing.JFrame {
 
     private static BankDao bankDao = new BankDaoImpl();
-    
-    /***
-     * 
+    private static BankConditionDao bankConditionDao = new BankConditionDaoImpl();
+    private static ConditionDao conditionDao = new ConditionDaoImpl();
+    private User user;
+
+    /**
+     * *
+     *
      */
-    public void inicializujTabulku(){
-    DefaultTableModel tableModel = (DefaultTableModel)ponukyTable.getModel();
+    public void inicializujTabulku(int suma) {
+        DefaultTableModel tableModel = (DefaultTableModel) ponukyTable.getModel();
+        List<Condition> conditions = conditionDao.getAll();
         List<Bank> banky = bankDao.getAll();
+        for (Bank bank : banky) {
+            List<BankCondition> bankConditions = bankConditionDao.getByIdB(bank.getId());
+            for (BankCondition bankCondition : bankConditions) {
+                for (Condition condition : conditions) {
+                    if (conditionDao.executeEpresion(condition.getExpression(), user.getId(), suma)) {
+                        Double tmpRate = bank.getPrimeInterestRate();
+                        tmpRate -= bankCondition.getChangeInterestRate();
+                        bank.setPrimeInterestRate(tmpRate);
+                    }
+                }
+            }
+        }
         List<Bank> temp = banky;
         sort(temp);
         ponukyTable.removeAll();
         tableModel.setNumRows(temp.size());
-        for (int i = temp.size()-1; i >= 0; i--) {
-           Long id = temp.get(i).getId();
-           String meno = temp.get(i).getName();
-           Double rating = temp.get(i).getPrimeInterestRate();
-           Object[] data = {id, meno, rating};
-           tableModel.setValueAt(id, i, 0);
-           tableModel.setValueAt(meno, i, 1);
-           tableModel.setValueAt(rating, i, 2);
-           }
+        for (int i = temp.size() - 1; i >= 0; i--) {
+            Long id = temp.get(i).getId();
+            String meno = temp.get(i).getName();
+            Double rating = temp.get(i).getPrimeInterestRate();
+            Object[] data = {id, meno, rating};
+            tableModel.setValueAt(id, i, 0);
+            tableModel.setValueAt(meno, i, 1);
+            tableModel.setValueAt(rating, i, 2);
+        }
     }
-    
+
     public static void sort(List<Bank> list) {
         sort(list, 0, list.size() - 1);
     }
@@ -78,18 +89,20 @@ public class userFrame extends javax.swing.JFrame {
                 }
             }
             Collections.swap(list, pivot, left - 1);
-            sort(list, from, right - 1); 
-            sort(list, right + 1, to);  
+            sort(list, from, right - 1);
+            sort(list, right + 1, to);
         }
     }
-    
+
     /**
      * Creates new form userFrame
+     *
      * @param user prihlaseny uzivatel
      */
     public userFrame(User user) {
+        this.user = user;
         initComponents();
-        //inicializujTabulku();
+        // inicializujTabulku();
     }
 
     /**
@@ -134,6 +147,12 @@ public class userFrame extends javax.swing.JFrame {
 
         sumaLabel.setText("Suma:");
 
+        sumaTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sumaTextFieldActionPerformed(evt);
+            }
+        });
+
         vyhladajButton.setText("Vyhladaj");
         vyhladajButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,8 +175,8 @@ public class userFrame extends javax.swing.JFrame {
                         .addGap(12, 12, 12)
                         .addComponent(sumaLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sumaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48)
+                        .addComponent(sumaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(vyhladajButton)))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
@@ -180,10 +199,13 @@ public class userFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void vyhladajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vyhladajButtonActionPerformed
-        inicializujTabulku();
+        inicializujTabulku(Integer.parseInt(sumaTextField.getText()));
     }//GEN-LAST:event_vyhladajButtonActionPerformed
 
-    
+    private void sumaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sumaTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sumaTextFieldActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
