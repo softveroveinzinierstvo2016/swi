@@ -67,7 +67,7 @@ public class Condition {
     /**
      * vracia mysql/sql select ktorý po doplnení parametrov id zakaznika, požičaná suma
      * a vykonani vráti hodnotu záujmu, ktorá sa na základe Mark porovná s value
-     * a určí sa či je vyskladaná podmienka banky splnená
+     * a určí sa či je vyskladaná podmienka banky splnená pre daného zákaznika
      * @return sql select čakajúci ako parametre id zakaznika , požičaná sumu 
      * @see BankCondition
      */
@@ -77,8 +77,8 @@ public class Condition {
 /**
      * nastavuje mysql/sql select ktorý po doplnení parametrov id zakaznika, požičaná suma
      * a vykonani vráti hodnotu záujmu, ktorá sa na základe Mark porovná s value
-     * a určí sa či je vyskladaná podmienka banky splnená
-     * @param expression NotNull, dĺžka od 1 do = 50,  select čakajúci ako parametre id zakaznika , požičaná sumu 
+     * a určí sa či je vyskladaná podmienka banky splnená pre daného zákaznika
+     * @param expression NotNull,  select čakajúci ako parametre id zakaznika , požičaná sumu 
      * @see BankCondition
      */
     public void setExpression(String expression) {

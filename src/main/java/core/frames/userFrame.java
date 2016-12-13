@@ -40,14 +40,17 @@ public class userFrame extends javax.swing.JFrame {
         List<Bank> banky = bankDao.getAll();
         for (Bank bank : banky) {
             List<BankCondition> bankConditions = bankConditionDao.getByIdB(bank.getId());
-            for (BankCondition bankCondition : bankConditions) {
-                for (Condition condition : conditions) {
+            for (BankCondition bankCondition : bankConditions) {    
+                Condition condition = conditionDao.getById(bankCondition.getIdC());
                     if (conditionDao.executeEpresion(condition.getExpression(), user.getId(), suma ,bankCondition.getMark(),bankCondition.getValue())) {
                         Double tmpRate = bank.getPrimeInterestRate();
-                        tmpRate -= bankCondition.getChangeInterestRate();
+                        System.out.println("Podmienka "+condition.getDescription()+" "+bankCondition.getMark()+" "+bankCondition.getValue());
+                        System.out.print(bank.getName()+" "+tmpRate);
+                        tmpRate = tmpRate - bankCondition.getChangeInterestRate();
+                        System.out.println(" - "+bankCondition.getChangeInterestRate()+" -->"+tmpRate);
                         bank.setPrimeInterestRate(tmpRate);
                     }
-                }
+                
             }
         }
         List<Bank> temp = banky;

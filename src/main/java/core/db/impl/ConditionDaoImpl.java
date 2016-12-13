@@ -8,6 +8,7 @@ package core.db.impl;
 import core.db.HibernateUtil;
 import core.db.entity.Condition;
 import core.db.ints.ConditionDao;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
@@ -122,11 +123,22 @@ public class ConditionDaoImpl implements ConditionDao {
     public boolean executeEpresion(String select, long idUsera, double pozicanaSuma, int mark,int bcValue) {
         int vysledok = 0;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Query result = session.createQuery(select).setParameter("idUsera", idUsera).setParameter("pozicanaSuma", pozicanaSuma).setParameter("mark", mark).setParameter("bcValue", bcValue);
+        System.out.println(select);
+        try{
+        Query result = session.createSQLQuery(select).setParameter("idUsera", idUsera).setParameter("pozicanaSuma", pozicanaSuma).setParameter("mark", mark).setParameter("bcValue", bcValue);
+      //  Query result = session.createSQLQuery(select);//.setParameter(1, idUsera).setParameter(2, pozicanaSuma).setParameter(0, bcValue);
+        
         if (result == null) {
             return false;
         }
-        vysledok = (int) result.uniqueResult();
+ 
+        vysledok = ((BigInteger) result.uniqueResult()).intValue();
+        System.out.println("Vysledok = "+vysledok);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
         session.close();
         if (vysledok == 1) {
             return true;
