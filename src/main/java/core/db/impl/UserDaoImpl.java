@@ -3,6 +3,7 @@ package core.db.impl;
 import core.db.HibernateUtil;
 import core.db.entity.User;
 import core.db.ints.UserDao;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import org.hibernate.Session;
 import java.util.List;
@@ -130,14 +131,14 @@ public class UserDaoImpl implements UserDao {
         List<Integer> zoznamIdUserov = new ArrayList<>();
         List<User> klienti = new ArrayList<>();
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Query result = session.createQuery("(select T.id from (\n" +
+        Query result = session.createSQLQuery("(select T.id from (\n" +
 "select U.id,sum(statement) 'vysl' from user U  left join accountstatements ACS on U.id = ACS.idU where U.idB = :idBanky and role = 'user' and  month(ACS.time)=month(now()-interval 1 month) and year(ACS.time)=year(now()-interval 1 month) and statement is not null and monthly_balance is null and statement > 0 group by U.id order by 'vysl'\n" +
 ")T order by T.vysl)").setParameter("idBanky", idBanky);
         if (result == null) {
             return null;
         }
         for (final Object o : result.list()) {
-            zoznamIdUserov.add((Integer) o);
+            zoznamIdUserov.add(((BigInteger) o).intValue() );
         }
         for(Integer i : zoznamIdUserov){
             klienti.add(getById((long)i));

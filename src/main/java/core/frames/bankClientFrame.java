@@ -24,6 +24,7 @@ public class bankClientFrame extends javax.swing.JFrame {
     public bankClientFrame(User bank) {
         this.bankUser = bank;
         initComponents();
+        inicializujTabulku();
     }
  public void inicializujTabulku(){
     DefaultTableModel tableModel = (DefaultTableModel)clientTable1.getModel();
